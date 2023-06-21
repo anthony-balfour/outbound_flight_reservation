@@ -1,0 +1,100 @@
+<!--
+  Anthony Balfour
+  6/2/2023
+
+  This page, flights.html, displays a section for choosing dates and locations for a flight, a list
+  of available flights, a search bar, filter options, and a grid/list style selector
+  -->
+
+  <!DOCTYPE html>
+  <html lang="en">
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Expedia Available Flights</title>
+      <link rel="stylesheet" href="flights.css">
+      <link rel="stylesheet" href="overall.css">
+      <link rel="stylesheet" href="loginshared.css">
+      <script src="flights.js"></script>
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
+      <link href="https://fonts.googleapis.com/css2?family=Geologica:wght@300&family=Noto+Sans:wght@200;300&family=Open+Sans:wght@300;400&family=Rubik:wght@400;500;600&family=Tilt+Warp&display=swap" rel="stylesheet">
+      <script src="https://kit.fontawesome.com/ec8b2e4dff.js" crossorigin="anonymous"></script>
+    </head>
+    <body>
+      <header>
+        <nav>
+          <img src="images/logo.png" alt="orange plane logo">
+          <a href="index.html"><p>Home</p></a>
+          <a href="flights.html"><p> Flights</p></a>
+          <div id="login-container" >
+            <a id="login"><p></p></a>
+            <div id="login-dropdown" class="lightgray-border flex column hidden">
+              <p id="sign-in">Login</p>
+              <p id="create-user">Create User</p>
+            </div>
+          </div>
+          <div id="menu">
+            <p> Menu</p>
+            <div class="dropdown hidden lightgray-border">
+              <p id="sign-out">Sign Out</p>
+            </div>
+          </div>
+        </nav>
+      </header>
+      <main>
+        <article>
+          <div class="flex">
+            <h1>Flights</h1>
+          </div>
+
+          <section id="flight-details" class="lightgray-border">
+            <h2>What's your flight plan?</h2>
+            <form>
+              <div id="flight-places" class="flex">
+                <label> Where are you flying from? <input type="text" size="13" value="Seattle">
+                </label>
+                <label> Where are you flying to? <input id="destination" type="text" size="13"
+                  placeholder="Phuket (City Name)"></label>
+                <label >Departing <input id="departing-date" type="date" >
+                  <!--Set min and max possibly for like 2 years-->
+                </label>
+                <label >Returning <input id="returning-date" type="date"></label>
+                <select>
+                  <option value="round-trip">Round Trip</option>
+                  <option value="one-way">One Way</option>
+                </select>
+              </div>
+              <button type="submit">Enter</button>
+            </form>
+          </section>
+
+          <section id="search" class="flex">
+            <label>Search
+              <input type="search" id="search-bar">
+              <span class="fa-solid fa-magnifying-glass"
+              id="search-button"></span>
+            </label>
+            <label>Filter
+              <select id="filter" name="filters">
+                <option value="featured">Featured</option>
+                <option value="low-price">Price: Low to High</option>
+                <option value="high-price">Price: High to Low</option>
+                <option value="airlines">Airlines</option>
+              </select>
+            </label>
+            <span id="grid" class="fa-solid fa-border-all"></span>
+            <span id="list" class="fa-solid fa-list"></span>
+          </section>
+
+          <aside id="reserve" class="lightgray-border hidden">
+            <button id="reserve-button">Reserve</button>
+          </aside>
+
+          <section id="available-flights" class="flex column lightgray-border">
+            <!--populated with database backend-->
+          </section>
+        </article>
+      </main>
+    </body>
+  </html>

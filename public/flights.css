@@ -1,0 +1,130 @@
+/**
+  * Name: Anthony Balfour
+  * Date: 6/2/2023
+  *
+  * This stylesheet contains the styling for flights.html. Styles used are column and row flexbox
+  direcitons of the list of available flights. Each flight card is also styled with flexbox.
+  Font Awesome icons were used for the search glass and respective list styles (grid vs list).
+  */
+
+/* available flights */
+
+#available-flights {
+  gap: 10px;
+  padding: 10px;
+  flex-wrap: wrap;
+}
+
+/* flight details search */
+
+#flight-details {
+  margin-bottom: 15px;
+}
+
+#flight-details button {
+  margin-top: 10px;
+  background-color: rgb(230, 156, 20);
+  border-radius: 4px;
+  border: none;
+  padding: 7px;
+  cursor: pointer;
+  box-shadow: 2px 2px gray;
+  transform: scale(0.85);
+}
+
+button {
+  background-color: rgb(230, 156, 20);
+  border-radius: 4px;
+  border: none;
+  padding: 7px;
+  cursor: pointer;
+  box-shadow: 2px 2px gray;
+  transform: scale(0.9);
+}
+
+/* input information in the #flight-details container */
+
+#flight-places {
+  gap: 6px;
+  flex-wrap: wrap;
+  justify-content: start;
+}
+
+/* flight cards */
+
+.flight-card {
+  justify-content: space-evenly;
+  display: flex;
+  align-items: center;
+  width: 40%;
+  cursor: pointer;
+}
+
+.logo {
+  object-fit: cover;
+  width: 10%;
+  height: 50%;
+}
+
+.price {
+  font-size: 1.1rem;
+}
+
+article .align-left {
+  align-items: start;
+}
+
+/* grid layout styling */
+
+.grid {
+  width: 25%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  cursor: pointer;
+  height: 300px;
+}
+
+.grid-logo {
+  object-fit: contain;
+  width: 32%;
+  height: 15%;
+}
+
+/* Search function */
+
+#search {
+  margin-bottom: 8px;
+  gap: 20px;
+}
+
+#search-button, #list, #grid {
+  cursor: pointer;
+}
+
+#search-button {
+  color: #d77214;
+}
+
+/* Filter */
+
+#filter {
+  font-family: "Rubik", sans-serif;
+  border-radius: 4px;
+  box-shadow: 1px 1px #ccc;
+  font-weight: 300;
+}
+
+/*Reserve button after clicking flight from list style */
+
+#reserve {
+  position: fixed;
+  width: 40vw;
+  left: 50%;
+  height: 45vh;
+}
+
+.reserve-button {
+  z-index: 10;
+}

@@ -1,0 +1,33 @@
+/**
+  * Name: Anthony Balfour
+  * Date: 5/5/ 2023
+  * Section: CSE 154 AF
+  *
+  * This stylesheet contains the login styling for multiple files:
+  * index.html, login.html, and flights.html
+  * It styles the dropdown menu when the user selects the "Login" option
+  * in the navbar
+  */
+
+  .dropdown:hover, #sign-in:hover, #create-user:hover {
+    background-color: rgb(230, 156, 20);
+    cursor: pointer;
+  }
+
+  #login-dropdown {
+    max-width: 70%;
+    white-space: nowrap;
+    position: absolute;
+    left: 20%;
+  }
+
+  #login-dropdown p {
+    margin: 0;
+    padding: 10px;
+    width: 80%;
+  }
+
+  #login-container {
+    position: relative;
+    width: initial;
+  }

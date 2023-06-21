@@ -1,0 +1,138 @@
+/**
+  * Name: Anthony Balfour
+  * Date: 6/6/ 2023
+  *
+  * This stylesheet contains the styling for index.html, the main landing page
+  * of the flight reservation website. It styles every section:
+  * -navbar, flight detail section, flight suggestions, flight deals, and title of the page
+  * footer. There are lightgray borders around most sections, and the overall layout is styled with
+  * grid. Other than black and white, an orange color is used.
+  */
+
+/* Grid overall styling for entire page */
+
+main {
+  height: 92vh;
+  display: grid;
+  grid-template: repeat(12, 1fr) / repeat(13, 1fr);
+  font-family: "Rubik", sans-serif;
+}
+
+/* Company name page title */
+
+#company-name {
+  grid-column: 9 / span 4;
+  grid-row: 3 / span 3;
+}
+
+#company-name h1 {
+  font-family: "Tilt Warp", "Rubik", cursive, sans-serif;
+  font-size: 3rem;
+}
+
+/* Flight input information section */
+
+#flight-details {
+  grid-column: 2 / span 5;
+  grid-row: 2 / span 5;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+#flight-places {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  justify-content: start;
+}
+
+#flight-details h2 {
+  font-family: "Tilt Warp", "Rubik", sans-serif;
+}
+
+#flight-details button {
+  background-color: rgb(230, 156, 20);
+  border-radius: 4px;
+  border: none;
+  padding: 7px;
+  cursor: pointer;
+  box-shadow: 2px 2px gray;
+}
+
+/* Flight suggestions section */
+
+#flight-suggestions {
+  grid-row: 8 / span 4;
+  grid-column: 2 / span 4;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 0.87rem;
+}
+
+#flight-suggestions div {
+  width: 95%;
+  height: 25%;
+  cursor: pointer;
+}
+
+#flight-suggestions > p {
+  align-self: flex-start;
+  margin-left: 15px;
+}
+
+#flight-suggestions .flight-card {
+  justify-content: space-evenly;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  gap: 4px;
+}
+
+.logo {
+  object-fit: contain;
+  width: 20%;
+  height: 50%;
+}
+
+/* flight deals */
+
+#flight-deals {
+  grid-row: 8 / span 3;
+  grid-column: 8 / span 5;
+  border-radius: 5px;
+}
+
+#deal-flights {
+  height: 100%;
+}
+
+#flight-deals div {
+  height: 100%;
+  width: 33%;
+  cursor: pointer;
+}
+
+#flight-deals > p {
+  margin-left: 3px;
+  align-self: start;
+}
+
+#flight-deals img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+/*Sign in options styling styling */
+
+#sign-in, #create-user {
+  white-space: nowrap;
+}
+
+#sign-out-message {
+  color: rgb(230, 156, 20);
+}

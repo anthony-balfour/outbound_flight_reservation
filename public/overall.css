@@ -1,0 +1,78 @@
+/**
+  * This stylesheet, overall.css contains the styling
+  * for every html page in the flight reservation website.
+  * It contains styling for the navbar, hidden display, font style of Rubik,
+  * and the lightgray-border class which is a thematic style through the site
+  */
+
+  /* nav styling */
+
+  nav, main, input, button, select {
+    font-family: "Rubik", sans-serif;
+  }
+
+  nav {
+    height: 3em;
+    width: 100%;
+    border: 1px solid lightgray;
+    display: flex;
+    justify-content: end;
+  }
+
+  nav p {
+    margin-right: 4rem;
+    margin-left: 4rem;
+    cursor: pointer;
+  }
+
+  nav a {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  nav img {
+    position: relative;
+    left: -50%;
+  }
+
+  #menu {
+    position: relative;
+    max-width: min-content;
+  }
+
+  #menu .dropdown p {
+    margin: 0;
+    padding: 6px;
+  }
+
+  #menu .dropdown:hover {
+    background-color: rgb(230, 156, 20);
+    cursor: pointer;
+  }
+
+  /* page styling */
+
+  .lightgray-border {
+    border: 1px solid lightgray;
+    border-radius: 5px;
+  }
+
+
+  .flex {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .column {
+    flex-direction: column;
+  }
+
+  .row {
+    flex-direction: row;
+  }
+
+  .hidden {
+    display: none;
+  }

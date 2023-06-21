@@ -1,0 +1,21 @@
+1. click away from login clears the display for logging in
+
+2. reloading login page brings blank page
+
+3. sign out doesnt refresh page - check, directs to homepage
+
+4. reserve button on grid side after clicking anothr card
+
+5. displaying errors properly on each page
+
+6. refreshign on login page has no display, must
+
+7. manage local storage storage attributes
+
+8.code quality
+-separate the flight select function in flights.js into two functions
+-one for list style
+-one for grid style
+
+9. Select trips and deals on the main page to lead to flights reservation
+page with reserve or more infomration

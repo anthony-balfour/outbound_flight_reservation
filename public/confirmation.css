@@ -1,0 +1,43 @@
+/**
+  * Name: Anthony Balfour
+  * Date: 6/2/2023
+  *
+  * This stylesheet, confirmation.css, contains the styling for confirmation.html.
+  * The page will show a single card with the flight information and a reserve button.
+  * The response to a successful confirmation will be a congratulations message and
+  * destination pictures. An unsuccessful confirmation will be styled with red text
+  */
+
+/* flight info */
+
+.logo {
+  object-fit: cover;
+  width: 10%;
+  height: 50%;
+}
+
+#flight-info {
+  max-width: 35%;
+}
+
+/* page styling */
+
+.black-border {
+  border: 2px solid black;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+.red-text {
+  color: rgb(209, 21, 21);
+}
+
+button {
+  background-color: rgb(230, 156, 20);
+  border-radius: 4px;
+  border: none;
+  padding: 7px;
+  cursor: pointer;
+  box-shadow: 2px 2px gray;
+  transform: scale(0.85);
+}

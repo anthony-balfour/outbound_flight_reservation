@@ -1,0 +1,57 @@
+<!--
+  Anthony Balfour
+  6/2/2023
+
+  This page, account.html, is the account page of the logged in user. It contains
+  information on the user id, any currently booked flights and past flights if available.
+  Once the user is logged in, there will be an option to sign out by clicking the Menu button.
+  Also, the "Login" navbar option becomes the word Account once the user is signed in.
+  -->
+
+  <!DOCTYPE html>
+  <html lang="en">
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Expedia Available Flights</title>
+      <link rel="stylesheet" href="account.css">
+      <link rel="stylesheet" href="overall.css">
+      <script src="account.js"></script>
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
+      <link href="https://fonts.googleapis.com/css2?family=Geologica:wght@300&family=Noto+Sans:wght@200;300&family=Open+Sans:wght@300;400&family=Rubik:wght@400;500;600&family=Tilt+Warp&display=swap" rel="stylesheet">
+      <script src="https://kit.fontawesome.com/ec8b2e4dff.js" crossorigin="anonymous"></script>
+    </head>
+    <body>
+
+      <header>
+        <nav>
+          <img src="images/logo.png" alt="orange plane logo">
+          <a href="index.html"><p>Home</p></a>
+          <a href="flights.html"><p> Flights</p></a>
+          <a href="account.html"><p>Account</p></a>
+          <div id="menu">
+            <p> Menu</p>
+            <div class="dropdown hidden lightgray-border">
+              <p id="sign-out">Sign Out</p>
+            </div>
+          </div>
+        </nav>
+      </header>
+
+      <main>
+        <article id="account-container" class="flex column">
+          <aside class="flex">
+            <h1></h1> <!-- Filled with user name -->
+            <h1></h1> <!--Filled with Welcome message -->
+          </aside>
+          <p id="account"></p> <!--Filled with ID numbers-->
+          <h2>Current Flights</h2>
+          <section id="current" class="lightgray-border"></section>
+          <h2>Past Flights</h2>
+          <section id="past" class="lightgray-border"></section>
+        </article>
+      </main>
+
+    </body>
+  </html>

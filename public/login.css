@@ -1,0 +1,33 @@
+/**
+  * Name: Anthony Balfour
+  * Date: 5/5/ 2023
+  * Section: CSE 154 AF
+  *
+  * This stylesheet contains the styling for login.html. There is a form
+  * in the center of the page with inputs for username and password. Depending
+  * on the user selection, either create user or login will be shown.
+  */
+
+/* page styles */
+
+.red-font {
+  color: rgb(216, 6, 6);
+}
+
+/* form */
+
+#create-user, #login {
+  height: 500px;
+  width: 30%;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+button {
+  background-color: rgb(230, 156, 20);
+  border-radius: 4px;
+  border: none;
+  padding: 7px;
+  cursor: pointer;
+  box-shadow: 2px 2px gray;
+}

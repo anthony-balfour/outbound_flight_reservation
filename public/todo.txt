@@ -1,0 +1,1 @@
+add loading screen as database pulls flights if not instant. Like a plane flying

@@ -1,0 +1,72 @@
+<!--
+  Anthony Balfour
+  6/2/2023
+  Section AF
+  TA: Donovan Jordan Kong, Sonia Saitawdekar
+
+  This page, login.html, contains the login form for a user on this Expedia flight reservation
+  webpage. If the login is successul, the user is directed to their account page. It also contains
+  the create user form.
+  -->
+
+<!DOCTYPE html>
+  <html lang="en">
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Expedia Available Flights</title>
+      <link rel="stylesheet" href="login.css">
+      <link rel="stylesheet" href="overall.css">
+      <link rel="stylesheet" href="loginshared.css">
+      <script src="login.js" ></script>
+    </head>
+    <body>
+      <header>
+        <nav>
+          <img src="images/logo.png" alt="orange plane logo">
+          <a href="index.html"><p>Home</p></a>
+          <a href="flights.html"><p> Flights</p></a>
+          <div id="login-container" >
+            <a id="login-nav"><p></p></a>
+            <div id="login-dropdown" class="lightgray-border flex column hidden">
+              <p id="sign-in">Login</p>
+              <p id="create-user-nav">Create User</p>
+            </div>
+          </div>
+          <p> Menu</p>
+        </nav>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
+        <link href="https://fonts.googleapis.com/css2?family=Geologica:wght@300&family=Noto+Sans:wght@200;300&family=Open+Sans:wght@300;400&family=Rubik:wght@400;500;600&family=Tilt+Warp&display=swap" rel="stylesheet">
+        <script src="https://kit.fontawesome.com/ec8b2e4dff.js" crossorigin="anonymous"></script>
+      </header>
+      <main>
+        <article id="create-section" class="flex column hidden">
+          <div>
+            <h1 >Create a New User</h1>
+          </div>
+          <form id="create-user" class="lightgray-border flex column">
+            <label>First Name: <input type="text" name="firstName"></label>
+            <label>Last Name: <input type="text" name="lastName"> </label>
+            <label>Username: <input type="text" name="username"></label>
+            <label>Password: <input type="password" name="password"></label>
+            <label>Email: <input type="email" name="email"></label>
+            <button>Enter</button>
+          </form>
+          <p></p>
+        </article>
+
+        <article id="login-section" class="flex column hidden">
+          <div>
+            <h1 >Login</h1>
+          </div>
+          <form id="login" class="lightgray-border flex column">
+            <label>Username: <input type="text" name="username"></label>
+            <label>Password: <input type="password" name="password"></label>
+            <button>Enter</button>
+          </form>
+          <p></p>
+        </article>
+      </main>
+    </body>
+  </html>

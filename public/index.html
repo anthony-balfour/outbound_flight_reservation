@@ -1,0 +1,113 @@
+<!--
+  Anthony Balfour
+  6/2/2023
+
+  This page, index.html, is the main landing page of the flight reservation website.
+  It contains 4 main sections:
+    -Flight itinerary
+    -Flight suggestions
+    -Flight deals
+    -Company name
+  as well as a navbar.
+
+  Image Sources:
+    Phi Phi Islands in Thailand:
+      https://lillagreen.at/phi-phi-islands-travel-guide/
+    Kalanggaman Island Beach:
+      https://www.planetware.com/philippines/top-rated-beaches-in-the-philippines-phi-1-39.htm
+    Italy Rome:
+      add
+    -->
+
+  <!DOCTYPE html>
+  <html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expedia Flight Reservations</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="overall.css">
+    <link rel="stylesheet" href="loginshared.css">
+    <script src="index.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Geologica:wght@300&family=Noto+Sans:wght@200;300&family=Open+Sans:wght@300;400&family=Rubik&family=Tilt+Warp&display=swap" rel="stylesheet">
+  </head>
+  <body>
+    <header>
+      <nav>
+        <img src="images/logo.png" alt="orange plane logo">
+        <p> Home</p>
+        <a href="flights.html"><p> Flights</p></a>
+        <div id="login-container" >
+          <a id="login"><p></p></a>
+          <div id="login-dropdown" class="lightgray-border flex column hidden">
+            <p id="sign-in">Login</p>
+            <p id="create-user">Create User</p>
+          </div>
+        </div>
+        <div id="menu">
+          <p> Menu</p>
+          <div class="dropdown hidden lightgray-border">
+            <p id="sign-out">Sign Out</p>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <main>
+
+      <section id="flight-details" class="lightgray-border">
+        <h2>What's your flight plan?</h2>
+        <form>
+          <div id="flight-places">
+            <label> Where are you flying from? <input type="text" size="17" value="Seattle"></label>
+            <label> Where are you flying to? <input type="text" size="17"
+              placeholder="Phuket (City Name)"></label>
+            <label>Departing <input type="date" ></label>
+            <label id="returning-location">Returning <input type="date"></label>
+            <select>
+              <option value="round-trip">Round Trip</option>
+              <option value="one-way">One Way</option>
+            </select>
+          </div>
+          <button type="submit">Enter</button>
+        </form>
+      </section>
+
+      <section id="flight-suggestions" class="lightgray-border">
+        <p>Trips from your location</p>
+        <div id="los-angeles" class="lightgray-border"></div>
+        <div id="new-york" class="lightgray-border"></div>
+        <div id="austin" class="lightgray-border"></div>
+      </section>
+
+      <section id="flight-deals" class="lightgray-border">
+        <p>Deals</p>
+        <section id="deal-flights" class="flex">
+          <div class="lightgray-border">
+            <img
+            src="images/phi-phi-islands.jpg"
+            alt="people kayaking in the Phi Phi Islands">
+            <p>Thailand  $200</p>
+          </div>
+          <div class="lightgray-border">
+            <img
+              src="images/kalanggaman-island-beach.jpg"
+              alt="amazing blue green ocean around a narrow island">
+            <p>Phillipines $300</p>
+          </div>
+          <div class="lightgray-border">
+            <img
+              src="images/colosseum.jpg"
+              alt="Roman Colosseum at night">
+            <p>Rome $500</p>
+          </div>
+        </section>
+      </section>
+
+      <aside id="company-name">
+        <h1>Expedia</h1>
+      </aside>
+    </main>
+  </body>
+</html>

@@ -1,0 +1,56 @@
+<!--
+  Anthony Balfour
+  6/2/2023
+
+  This page, confirmation.html, confirms the reservation of a flight. If it is successful, the
+  page will display a success message. If the flight dates happen on the same day as other flights,
+  then a message stating the reservation was not succesful will be displayed.
+  -->
+
+  <!DOCTYPE html>
+  <html lang="en">
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Expedia Available Flights</title>
+      <link rel="stylesheet" href="confirmation.css">
+      <link rel="stylesheet" href="overall.css">
+      <script src="confirmation.js"></script>
+    </head>
+    <body>
+      <header>
+        <nav>
+          <img src="images/logo.png" alt="orange plane logo">
+          <a href="index.html"><p>Home</p></a>
+          <div id="login-container" >
+            <a id="login"><p></p></a>
+            <div id="login-dropdown" class="lightgray-border flex column hidden">
+              <p id="sign-in">Login</p>
+              <p id="create-user">Create User</p>
+            </div>
+          </div>
+          <div id="menu">
+            <p>Menu</p>
+            <div class="dropdown hidden lightgray-border">
+              <p id="sign-out">Sign Out</p>
+            </div>
+          </div>
+        </nav>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
+        <link href="https://fonts.googleapis.com/css2?family=Geologica:wght@300&family=Noto+Sans:wght@200;300&family=Open+Sans:wght@300;400&family=Rubik:wght@400;500;600&family=Tilt+Warp&display=swap" rel="stylesheet">
+        <script src="https://kit.fontawesome.com/ec8b2e4dff.js" crossorigin="anonymous"></script>
+      </header>
+      <main>
+        <h1>Booking Confirmation</h1>
+        <article id="flight-info">
+          <button id="confirm-button">Confirm</button>
+        </article>
+        <article id="confirmation" class="hidden">
+          <h1></h1>
+          <p>If you would like to many any changes to your flight, go to your account page </p>
+        </article>
+
+      </main>
+    </body>
+  </html>

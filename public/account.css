@@ -1,0 +1,68 @@
+/**
+  * Name: Anthony Balfour
+  * Date: 6/2/2023
+  * This stylesheet, account.css contains the styling for accounts.html, The main color
+  theme is black, white, and orange. The containers for past and current flights are styled using
+  flexbox column. The nav styling and overall page styling (such as .hidden) is in overall.css
+  */
+
+/* account section styling */
+
+#account-container {
+  align-items: start;
+}
+
+#account-container aside {
+  width: 100%;
+  justify-content: space-between;
+}
+
+#account-container aside h1:nth-child(2) {
+  margin-right: 27%;
+}
+
+#account-container h1 {
+  font-size: 2rem;
+  color: rgb(230, 156, 20);
+}
+
+/* current/past flight card styling */
+
+.flight-card {
+  justify-content: space-evenly;
+  display: flex;
+  align-items: center;
+  width: 40%;
+}
+
+.logo {
+  object-fit: cover;
+  width: 10%;
+  height: 50%;
+}
+
+.price {
+  font-size: 1.1rem;
+}
+
+#past .past-flights, #current .current-flights {
+  align-items: start;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+#menu {
+  position: relative;
+  max-width: min-content;
+}
+
+#menu .dropdown p {
+  margin: 0;
+  padding: 6px;
+}
+
+#menu .dropdown:hover {
+  background-color: rgb(230, 156, 20);
+  cursor: pointer;
+}
