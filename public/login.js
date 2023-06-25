@@ -131,6 +131,27 @@
       localStorage.setItem("create-user", "true");
       window.location.href="login.html";
     })
+
+    // functionality for closing the login dropdown when clickinng anywhere but
+    // on the "Login" option on the nav
+    closeLoginDropdown();
+  }
+
+  /**
+   * Hides the login dropdown menu when clicking anywhere but the "Login" option
+   * in the navbar
+   */
+  function closeLoginDropdown() {
+    let loginNav = qs("#login-dropdown > p");
+    let loginDropdown = id("login-dropdown");
+    document.addEventListener("click", (event) => {
+      if(!loginDropdown.classList.contains("hidden")) {
+        const clickInsideDropdown = (event.target.textContent === loginNav.textContent);
+        if (!clickInsideDropdown) {
+          id("login-dropdown").classList.add("hidden");
+        }
+      }
+    });
   }
 
   /**

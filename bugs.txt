@@ -1,5 +1,5 @@
 1. click away from login clears the display for logging in
-
+1. Finished 6/25
 2. reloading login page brings blank page
 
 3. sign out doesnt refresh page - check, directs to homepage
