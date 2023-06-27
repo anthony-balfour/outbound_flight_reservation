@@ -16,7 +16,7 @@
 
   /**
    * Enables form submissions for user login and create user
-   * Changes login option in the nav to account if the user is logged in
+   * Changes "login" option in the nav to "account" if the user is logged in
    */
   function init() {
     formListener();
@@ -124,12 +124,18 @@
     dropdown.classList.toggle("hidden");
 
     id("sign-in").addEventListener("click", () => {
-      localStorage.setItem("sign-in", "true");
-      window.location.href="login.html";
+      // localStorage.setItem("sign-in", "true");
+      // window.location.href="login.html";
+      id("login-section").classList.remove("hidden");
+      qs("#login-section h1").classList.remove("hidden");
+      id("create-section").classList.add("hidden");
+      qs("#create-section h1").classList.add("hidden");
     })
     id("create-user-nav").addEventListener("click", () => {
-      localStorage.setItem("create-user", "true");
-      window.location.href="login.html";
+      id("login-section").classList.add("hidden");
+      qs("#login-section h1").classList.add("hidden");
+      id("create-section").classList.remove("hidden");
+      qs("#create-section h1").classList.remove("hidden");
     })
 
     // functionality for closing the login dropdown when clickinng anywhere but

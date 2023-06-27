@@ -58,11 +58,17 @@
 }
 
 #menu .dropdown p {
-  margin: 0;
-  padding: 6px;
+  text-align: center;
 }
 
 #menu .dropdown:hover {
   background-color: rgb(230, 156, 20);
   cursor: pointer;
+}
+
+#menu .dropdown {
+  outline: 1px solid orange;
+  padding: 7px;
+  width: 75%;
+  margin: auto;
 }

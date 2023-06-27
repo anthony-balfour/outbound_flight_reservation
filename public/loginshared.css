@@ -9,7 +9,7 @@
   * in the navbar
   */
 
-  .dropdown:hover, #sign-in:hover, #create-user:hover {
+  .dropdown:hover, #sign-in:hover, #create-user-nav:hover {
     background-color: rgb(230, 156, 20);
     cursor: pointer;
   }

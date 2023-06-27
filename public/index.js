@@ -186,7 +186,7 @@
     let paragraph = generate("p");
     paragraph.id = "sign-out-message";
     paragraph.textContent = "You have been signed out successfully";
-    id("menu").appendChild(paragraph);
+    id("login-container ").appendChild(paragraph);
   }
 
   /**

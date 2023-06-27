@@ -1,8 +1,12 @@
 1. click away from login clears the display for logging in
 1. Finished 6/25
+
 2. reloading login page brings blank page
+2. Finished 6/25
 
 3. sign out doesnt refresh page - check, directs to homepage
+On flights page, page doesnt go to hoem page
+Also, framing is unaligned, need to space out text
 
 4. reserve button on grid side after clicking anothr card
 

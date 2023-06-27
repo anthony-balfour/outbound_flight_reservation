@@ -76,3 +76,26 @@
   .hidden {
     display: none;
   }
+
+  /* menu styling */
+
+  #menu {
+    position: relative;
+    width: 300px;
+  }
+
+  #menu .dropdown p {
+    text-align: center;
+  }
+
+  #menu .dropdown:hover {
+    background-color: rgb(230, 156, 20);
+    cursor: pointer;
+  }
+
+  #menu .dropdown {
+    outline: 1px solid orange;
+    padding: 7px;
+    width: 75%;
+    margin: auto;
+  }
