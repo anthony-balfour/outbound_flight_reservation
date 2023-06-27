@@ -161,27 +161,29 @@
     menuDropdown.classList.toggle("hidden");
   }
 
-  /**
-   * Signs the user out, displays a signed out message,
-   * and directs the user to the homepage. The sign out is not visible
-   * if no user is logged in
+    /**
+   * Signs the user out. The account option in the nav bar is changed to login
+   * Displays a message under the sign out button stating the user is signed out.
+   * Directs the user to the home page after 1.5 seconds
    */
-  function signOut() {
-    // clears the sign out message if already on page
-    if (id("sign-out-message")) {
-      id("sign-out-message").remove();
+    function signOut() {
+      // this clears repeated sign out messages
+      if (id("sign-out-message")) {
+        id("sign-out-message").remove();
+      }
+      const TWO_SECONDS = 1750;
+      localStorage.removeItem("logged-in");
+      let paragraph = generate("p");
+      let paragraph2 = generate("p");
+      paragraph.classList.add("sign-out-message");
+      paragraph2.classList.add("sign-out-message-two");
+      paragraph.textContent = "You have been signed out successfully";
+      paragraph2.textContent = "You will be directed to the homepage";
+      id("login-container").append(paragraph, paragraph2);
+      setTimeout(() => {
+        window.location.href="index.html";
+      }, TWO_SECONDS);
     }
-    const TWO_SECONDS = 1500;
-    localStorage.removeItem("logged-in");
-    let paragraph = generate("p");
-    paragraph.id = "sign-out-message";
-    paragraph.textContent = "You have been signed out successfully" +
-    " and will be directed to the homepage";
-    id("menu").appendChild(paragraph);
-    setTimeout(() => {
-      window.location.href="index.html";
-    }, TWO_SECONDS);
-  }
 
   /**
    * Changes the login option in the navbar from "login" to "account"

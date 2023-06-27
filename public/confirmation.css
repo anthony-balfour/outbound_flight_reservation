@@ -41,3 +41,13 @@ button {
   box-shadow: 2px 2px gray;
   transform: scale(0.85);
 }
+
+/* sign-out message */
+
+#sign-out-message, .sign-out-message {
+  top: 100px;
+}
+
+.sign-out-message-two {
+  top: 130px;
+}

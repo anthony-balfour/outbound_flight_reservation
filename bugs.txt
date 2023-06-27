@@ -8,6 +8,8 @@
 On flights page, page doesnt go to hoem page
 Also, framing is unaligned, need to space out text
 
+Finishd 6/26
+
 4. reserve button on grid side after clicking anothr card
 
 5. displaying errors properly on each page
@@ -23,3 +25,13 @@ Also, framing is unaligned, need to space out text
 
 9. Select trips and deals on the main page to lead to flights reservation
 page with reserve or more infomration
+
+10. Grid not showing up
+
+11. flights not sorting by airlines
+
+12. CSS for hovering items on main page
+
+13. directing from main page to flights page with deals
+
+14. displaying separate view for deals 

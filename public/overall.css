@@ -99,3 +99,23 @@
     width: 75%;
     margin: auto;
   }
+
+  /* sign-out */
+
+  #account-nav {
+    position: relative;
+  }
+
+  #login-container {
+    position: relative;
+  }
+
+  #sign-out-message, .sign-out-message, .sign-out-message-two {
+    color: rgb(230, 156, 20);
+    white-space: nowrap;
+    position: absolute;
+    left: 40px;
+    cursor: default;
+    font-size: 0.83em;
+  }
+

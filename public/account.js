@@ -171,13 +171,15 @@
     if (id("sign-out-message")) {
       id("sign-out-message").remove();
     }
-    const TWO_SECONDS = 1500;
+    const TWO_SECONDS = 1750;
     localStorage.removeItem("logged-in");
     let paragraph = generate("p");
-    paragraph.id = "sign-out-message";
-    paragraph.textContent = "You have been signed out successfully and will be directed to " +
-    "the homepage";
-    id("menu").appendChild(paragraph);
+    let paragraph2 = generate("p");
+    paragraph.classList.add("sign-out-message");
+    paragraph2.classList.add("sign-out-message-two");
+    paragraph.textContent = "You have been signed out successfully";
+    paragraph2.textContent = "You will be directed to the homepage";
+    id("account-nav").append(paragraph, paragraph2);
     setTimeout(() => {
       window.location.href="index.html";
     }, TWO_SECONDS);

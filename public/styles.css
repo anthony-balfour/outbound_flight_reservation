@@ -137,6 +137,7 @@ main {
   color: rgb(230, 156, 20);
   white-space: nowrap;
   position: absolute;
-  left: -30px;
+  left: 40px;
   cursor: default;
+  font-size: 0.83em;
 }

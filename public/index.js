@@ -179,6 +179,7 @@
    * if no user is logged in
    */
   function signOut() {
+    const ONE_SECOND = 500;
     if (id("sign-out-message")) {
       id("sign-out-message").remove();
     }
@@ -186,7 +187,12 @@
     let paragraph = generate("p");
     paragraph.id = "sign-out-message";
     paragraph.textContent = "You have been signed out successfully";
-    id("login-container ").appendChild(paragraph);
+    setTimeout(() => {
+      id("login-container").appendChild(paragraph);
+      qs("#menu .dropdown").classList.add("hidden");
+    }, ONE_SECOND);
+
+
   }
 
   /**

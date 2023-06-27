@@ -441,18 +441,26 @@
 
   /**
    * Signs the user out, displays a signed out message,
-   * and directs the user to the homepage. The sign out is not visible
+   * and directs the user to the homepage. The sign out option in the menu is not visible
    * if no user is logged in
    */
   function signOut() {
+    // this clears repeated sign out messages
     if (id("sign-out-message")) {
       id("sign-out-message").remove();
     }
+    const TWO_SECONDS = 1750;
     localStorage.removeItem("logged-in");
     let paragraph = generate("p");
-    paragraph.id = "sign-out-message";
+    let paragraph2 = generate("p");
+    paragraph.classList.add("sign-out-message");
+    paragraph2.classList.add("sign-out-message-two");
     paragraph.textContent = "You have been signed out successfully";
-    id("menu").appendChild(paragraph);
+    paragraph2.textContent = "You will be directed to the homepage";
+    id("login-container").append(paragraph, paragraph2);
+    setTimeout(() => {
+      window.location.href="index.html";
+    }, TWO_SECONDS);
   }
 
    /**

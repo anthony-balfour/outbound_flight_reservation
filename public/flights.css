@@ -128,3 +128,13 @@ article .align-left {
 .reserve-button {
   z-index: 10;
 }
+
+/* sign-out message */
+
+#sign-out-message, .sign-out-message {
+  top: 110px;
+}
+
+.sign-out-message-two {
+  top: 130px;
+}

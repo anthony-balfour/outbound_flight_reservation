@@ -72,3 +72,13 @@
   width: 75%;
   margin: auto;
 }
+
+/* sign-out message */
+
+#sign-out-message, .sign-out-message {
+  top: 100px;
+}
+
+.sign-out-message-two {
+  top: 130px;
+}
