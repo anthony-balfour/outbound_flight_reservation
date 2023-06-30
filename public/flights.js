@@ -48,6 +48,9 @@
     if (localStorage.getItem("logged-in")) {
       menuEventListener();
     }
+
+    // flight suggestions
+    flightSuggestion();
   }
 
   /**
@@ -60,12 +63,12 @@
     id("departing-date").value = localStorage.getItem("startDate");
     id("returning-date").value = localStorage.getItem("endDate");
     id("destination").value = localStorage.getItem("destination");
-    let fetchLink = "/flightslist";
+    let fetchLink = "/flightslist?";
     let startDate = localStorage.getItem("startDate");
     let endDate = localStorage.getItem("endDate");
     let destination = localStorage.getItem("destination");
     if (startDate) {
-      fetchLink += "?start_date=" + startDate;
+      fetchLink += "start_date=" + startDate;
     }
     if (endDate) {
       fetchLink += "&end_date=" + endDate;
@@ -140,7 +143,9 @@
     price.textContent = "$" + flight.price;
     price.classList.add("price");
     airline.textContent = flight.airline;
+    airline.classList.add("airline");
     location.textContent = flight.location;
+    location.classList.add("location");
     logo.src = "/images/" + flight.airline.toLowerCase() + ".png";
     logo.classList.add("logo");
     logo.alt = flight.airline + " logo";
@@ -165,12 +170,12 @@
    * In grid style: displays a reserve button at the bottom of the grid card
    * @param {event} event - click event on the each flight card displayed
    * @param {HTMLElement} airline - "p" element with airline text
-   * @param {HTMLElement} nonstop "p" element with nonstop text
+   * @param {HTMLElement} date "p" element with dates text
    * @param {HTMLElement} location "p" element with destination
    * @param {HTMLElement} price "p" element with price
    * @param {HTMLElement} flight - JSON of the flight information
    */
-  function flightSelect(event, airline, nonstop, location, price, flight) {
+  function flightSelect(event, airline, date, location, price, flight) {
     localStorage.setItem("flight-id", flight.id);
 
     // clearing selected flight info container
@@ -178,60 +183,74 @@
       id("flight-info").innerHTML = "";
     }
 
-    // Clearing grid of the reserve button after it's been clicked off of
+    // If the current clicked card in grid view does not have a reserve button, a childNode[5],
+    // any other reserve button should be cleared and the clicked card should
+    // have one
     // Possibly add event for hover away?
-    if (event.target.nodeName === "DIV") {
-      if(!event.target.childNodes[5]){
+      if(!event.currentTarget.childNodes[5]){
         qsa(".reserve-button").forEach(button => {
           button.remove();
         });
       }
-    };
 
     if (listStyle === "list") {
-     // moving available flights to the left
-      id("available-flights").classList.add("align-left");
-      id("reserve").classList.remove("hidden");
-      id("reserve-button").addEventListener("click", reserveFlight);
-
-      // creating container for extra flight details which populates
-      // on the right side of the page
-      let container = generate("div");
-      let reserveHeader = generate("h3");
-      reserveHeader.textContent = "Flight Details";
-      container.id = "flight-info";
-      let capacity = generate("p");
-      let newAirline = generate("p");
-      newAirline.textContent = "Airlines: " + airline.textContent;
-      capacity.textContent = "Capacity: " + flight.capacity;
-      let reserve = generate("h3").textContent = "Would you like to reserve this flight?"
-      container.append(reserveHeader, location, newAirline, nonstop, capacity, price, reserve);
-      id("reserve").prepend(container);
+      flightSelectList(airline, date, location, price, flight);
 
       // if (listStyle === "grid")
     } else {
-      if (id("available-flights").classList.contains("align-left")) {
-        id("available-flights").classList.remove("align-left");
-      }
-      if (event.target.nodeName === "DIV") {
-        // event.target.childNodes[5] is the reserve button
-        if(!event.target.childNodes[5]){
-          let reserveButton = generate("button");
-          reserveButton.textContent = "Reserve";
-          reserveButton.classList.add("reserve-button");
-          reserveButton.addEventListener("click", reserveFlight);
+      flightSelectGrid(event);
+    }
+  }
 
-          // if the event target is actually a sub element like the airlines logo
-          // or the price "p" element, the reserve button will be appended to the parent
-          // div container. Otherwise, the button is added right under the selected
-          // target, which is not the intended function
-          if (event.target.parentElement.nodeName === "DIV") {
-            event.target.parentElement.appendChild(reserveButton);
-          } else {
-            event.target.appendChild(reserveButton);
-          }
-        }
-      }
+  /**
+   * Handles the creation of a flight reservation card if a flight is selected from the list
+   * view
+   * @param {HTMLElement} airline - "p" element with airline text
+   * @param {HTMLElement} date "p" element with dates text
+   * @param {HTMLElement} location "p" element with destination
+   * @param {HTMLElement} price "p" element with price
+   * @param {HTMLElement} flight - JSON of the flight information
+   */
+  function flightSelectList(airline, date, location, price, flight) {
+    // moving available flights to the left
+    id("available-flights").classList.add("align-left");
+    id("reserve").classList.remove("hidden");
+    id("reserve-button").addEventListener("click", reserveFlight);
+
+    // creating container for extra flight details which populates
+    // on the right side of the page
+    let container = generate("div");
+    let reserveHeader = generate("h3");
+    reserveHeader.textContent = "Flight Details";
+    container.id = "flight-info";
+    let capacity = generate("p");
+    let newAirline = generate("p");
+    newAirline.textContent = "Airlines: " + airline.textContent;
+    capacity.textContent = "Capacity: " + flight.capacity;
+    let reserve = generate("h3").textContent = "Would you like to reserve this flight?"
+    container.append(reserveHeader, location, newAirline, date, capacity, price, reserve);
+    id("reserve").prepend(container);
+  }
+
+  /**
+   * Handles a flight select to bring up a reserve button when a flight card is selected
+   * when in grid view
+   * @param {event} event - click event on the each flight card displayed
+   */
+  function flightSelectGrid(event) {
+    if (id("available-flights").classList.contains("align-left")) {
+      id("available-flights").classList.remove("align-left");
+    }
+
+      // If the selected flight card does not have a reserve button, a 5th child node
+      if(!event.currentTarget.childNodes[5]){
+        let reserveButton = generate("button");
+        reserveButton.textContent = "Reserve";
+        reserveButton.classList.add("reserve-button");
+        reserveButton.addEventListener("click", reserveFlight);
+
+        // appending the reserve button to the grid card
+        event.currentTarget.appendChild(reserveButton);
     }
   }
 
@@ -260,6 +279,48 @@
         event.target.parentElement.appendChild(needToLogin);
       }
     }
+  }
+
+  /**
+   * Brings up the reserve option for the selected flight from flight suggestions on the
+   * landing page. Fetches the flight ID using the id stored in localStorage.
+   */
+  function flightSuggestion() {
+    if (localStorage.getItem("flight-suggestion") === "true") {
+    let params = new FormData();
+    params.append("id", localStorage.getItem("flight-id"));
+    fetch("/get_flight", {method: "POST", body: params})
+      .then(statusCheck)
+      .then(res => res.json())
+      .then(constructFlightSuggestion)
+      .then(handleError);
+    }
+  }
+
+  /**
+   * Constructs the flight reservation panel if the flight suggestion
+   * card was selected on the index.html homepage
+   * @param {Object} flightJson - all JSON information about the selected flight
+   * including price, destination, dates, airlines
+   */
+  function constructFlightSuggestion(flightJson) {
+    let dates = generate("p");
+    let startDate = flightJson.start_date.split("-")
+    startDate = startDate[1] + "/" + startDate[2];
+    let endDate = flightJson.end_date.split("-")
+    endDate = endDate[1] + "/" + endDate[2];
+    dates.textContent = startDate + " to " + endDate;
+
+    let destination = generate("p");
+    destination.textContent = localStorage.getItem("destination");
+
+    let price = generate("p");
+    price.textContent = "$" + localStorage.getItem("price");
+
+    let airlines = generate("p");
+    airlines.textContent = flightJson.airline;
+    
+    flightSelectList(airlines, dates, destination, price, flightJson);
   }
 
   /**
@@ -355,6 +416,7 @@
     qsa(".flight-card").forEach(flightCard => {
       flightCard.classList.add("grid");
       flightCard.querySelector(".logo").classList.add("grid-logo");
+
       // changing location to the top of the grid card
       let location = flightCard.querySelector(".location");
       location.remove();
@@ -498,7 +560,7 @@
       localStorage.setItem("sign-in", "true");
       window.location.href="login.html";
     })
-    id("create-user").addEventListener("click", () => {
+    id("create-user-nav").addEventListener("click", () => {
       localStorage.setItem("create-user", "true");
       window.location.href="login.html";
     })

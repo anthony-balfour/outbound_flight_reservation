@@ -1,14 +1,41 @@
-1. click away from login clears the display for logging in
+Completed**********
+
+1.
+click away from login clears the display for logging in
 1. Finished 6/25
 
-2. reloading login page brings blank page
+2.
+reloading login page brings blank page
 2. Finished 6/25
 
-3. sign out doesnt refresh page - check, directs to homepage
+3.
+sign out doesnt refresh page - check, directs to homepage
 On flights page, page doesnt go to hoem page
 Also, framing is unaligned, need to space out text
-
 Finishd 6/26
+
+10.
+Grid not showing up
+6/27/2023
+
+11.
+flights not sorting by airlines
+6/27/2023
+-Removed classnames when constructing flight cards on location and airlines
+-to try to reduce lines of code and since I didn't think I used the classNames
+-I used event listeners and query selectors on those classnames
+
+15.
+Create user has no href
+Finished 6/27
+- Changed class names and it affected add event listeners.
+- Have to be careful and check for usages when I change classNames
+
+-Clicking on flight suggestions on main page leads to flights page with
+-reserve card
+  finished 6/29
+
+TODO*************
 
 4. reserve button on grid side after clicking anothr card
 
@@ -26,12 +53,11 @@ Finishd 6/26
 9. Select trips and deals on the main page to lead to flights reservation
 page with reserve or more infomration
 
-10. Grid not showing up
-
-11. flights not sorting by airlines
-
 12. CSS for hovering items on main page
 
 13. directing from main page to flights page with deals
 
-14. displaying separate view for deals 
+14. displaying separate view for deals
+
+16. Line up fields in login and create a new user
+

@@ -11,10 +11,10 @@ and update flight capacity.
 **Returned Data Format**: JSON
 
 **Description:** Returns JSON with about each flight given the specified criteria. Returns price, airline, destination, start_date, and end_date, id, capacity
-Takes in query paramters of
--start_date
--end_date
--destination
+Takes in query paramters of:<br>
+-start_date<br>
+-end_date<br>
+-destination<br>
 If no parameters are given, gives a list of all flights occuring at the current date
 or later
 

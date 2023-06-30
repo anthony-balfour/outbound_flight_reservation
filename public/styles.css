@@ -92,6 +92,12 @@ main {
   gap: 4px;
 }
 
+.flight-card:hover {
+  /* border-color: rgb(133, 130, 130); */
+  border-width: 2.98px;
+  /* transform: translateY(-7px); */
+}
+
 .logo {
   object-fit: contain;
   width: 20%;
@@ -141,3 +147,4 @@ main {
   cursor: default;
   font-size: 0.83em;
 }
+

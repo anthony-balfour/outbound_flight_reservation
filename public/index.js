@@ -45,7 +45,7 @@
    * @param {String} destination
    */
   function fillFlightSuggestions(destination) {
-    fetch("flightslist?destination=" + destination)
+    fetch("/flightslist?destination=" + destination)
       .then(statusCheck)
       .then(res => res.json())
       .then(displayFlight)
@@ -60,6 +60,9 @@
    * @param {Object} destinationJson - JSON of the flight information
    */
   function displayFlight(destinationJson) {
+    console.log(destinationJson);
+    // destinationJson[1] is the second flight in the list of flights to the given location
+    // this was done for choosing different airline's for the logo look on the landing page
     let flight = destinationJson[1];
     if (destinationJson[1].location === "Austin") {
       flight = destinationJson[3]
@@ -79,18 +82,46 @@
     logo.src = "/images/" + flight.airline.toLowerCase() + ".png";
     logo.classList.add("logo");
     logo.alt = flight.airline + " logo";
-    let flightContainer = flight.location.toLowerCase().split(" ").join("-");
+    // sets flight container value to name of location
+    // on the html page there are id's for LA, NY, and Austin as default suggestions
+    let flightLocation = flight.location.toLowerCase().split(" ").join("-");
 
     // in the index.html page, each container has the id of the suggested location
-    id(flightContainer).classList.add("flight-card");
-    id(flightContainer).append(location, price, date, logo);
+    id(flightLocation).classList.add("flight-card");
+    id(flightLocation).addEventListener("click", (event) => {
+      flightSuggestion(event, flight);
+    });
+    id(flightLocation).append(location, price, date, logo);
+  }
+
+  /**
+   * Directs the user to the "flights.html" webpage and directly to the reserve view for the
+   * selected flight.
+   * Sets the flight id, airline, and dates to local storage
+   * @param {event} event - click on flight suggestions flight on landing page
+   */
+  function flightSuggestion(event, flight) {
+    // info in order: location, price, dates, airlines logo
+    console.log(flight);
+    let flightDetails = event.currentTarget.children;
+    let dates = flightDetails[2].textContent.split("to");
+    let startDate = "2023-" + dates[0].split("/").join("-").trim();
+    let endDate = "2023-" + dates[1].split("/").join("-").trim();
+    let destination = flightDetails[0].textContent;
+    localStorage.setItem("flight-suggestion", "true");
+    localStorage.setItem("destination", destination);
+    localStorage.setItem("startDate", startDate);
+    localStorage.setItem("endDate", endDate);
+    localStorage.setItem("flight-id", flight.id);
+    localStorage.setItem("price", flight.price);
+    window.location.href="flights.html";
   }
 
   /**
    * Submits the flight details form and then directs to the flights page which will be populated
    * by flights within the given criteria.
    * Saves the input information to local storage to use on the flights.html page.
-   * @param {event} event - click event on the enter button in the flight details section
+   * @param {event} event - click on the "Enter" button in the flight details section
    */
   function submitFlight(event) {
     let destination = event.target[1].value;
@@ -120,7 +151,7 @@
       localStorage.setItem("sign-in", "true");
       window.location.href="login.html";
     });
-    id("create-user").addEventListener("click", () => {
+    id("create-user-nav").addEventListener("click", () => {
       localStorage.setItem("create-user", "true");
       window.location.href="login.html";
     });
