@@ -36,26 +36,31 @@
   <body>
     <header>
       <nav>
-        <img src="images/logo.png" alt="orange plane logo">
-        <p> Home</p>
-        <a href="flights.html"><p> Flights</p></a>
-        <div id="login-container" >
-          <a id="login"><p></p></a>
-          <div id="login-dropdown" class="lightgray-border flex column hidden">
-            <p id="sign-in">Login</p>
-            <p id="create-user-nav">Create User</p>
+        <section id="logo-container">
+          <img src="images/logo.png" alt="orange plane logo" id="logo">
+        </section>
+
+        <section id="nav-links">
+          <p> Home</p>
+          <a href="flights.html"><p> Flights</p></a>
+          <div id="login-container" >
+            <a id="login"><p></p></a>
+            <div id="login-dropdown" class="lightgray-border flex column hidden">
+              <p id="sign-in">Login</p>
+              <p id="create-user-nav">Create User</p>
+            </div>
           </div>
-        </div>
-        <div id="menu">
-          <p> Menu</p>
-          <div class="dropdown hidden lightgray-border">
-            <p id="sign-out">Sign Out</p>
+          <div id="menu">
+            <p> Menu</p>
+            <div class="dropdown hidden lightgray-border">
+              <p id="sign-out">Sign Out</p>
+            </div>
           </div>
-        </div>
+        </section>
       </nav>
     </header>
-    <main>
 
+    <main>
       <section id="flight-details" class="lightgray-border">
         <h2>What's your flight plan?</h2>
         <form>

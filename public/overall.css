@@ -16,7 +16,7 @@
     width: 100%;
     border: 1px solid lightgray;
     display: flex;
-    justify-content: end;
+    justify-content: space-between;
   }
 
   nav p {
@@ -30,9 +30,22 @@
     color: inherit;
   }
 
-  nav img {
+  #logo {
+    justify-self: start;
+    object-fit: contain;
+    height: 100%;
     position: relative;
-    left: -50%;
+    left: 27%;
+  }
+
+  #logo-container {
+    height: 100%;
+    width: 30%;
+  }
+
+  #nav-links {
+    display: flex;
+    justify-content: flex-end;
   }
 
   #menu {

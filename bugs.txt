@@ -37,6 +37,12 @@ Finished 6/27
 
 TODO*************
 
+-logo should be in flex container in the nav
+
+-for smaller screens I should adjust deals pictures? not sure why theyre like that 
+
+- add styling to flight reserve cards
+
 4. reserve button on grid side after clicking anothr card
 
 5. displaying errors properly on each page
@@ -60,4 +66,5 @@ page with reserve or more infomration
 14. displaying separate view for deals
 
 16. Line up fields in login and create a new user
+
 
