@@ -35,7 +35,7 @@
     object-fit: contain;
     height: 100%;
     position: relative;
-    left: 27%;
+    left: 22%;
   }
 
   #logo-container {
@@ -75,7 +75,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-wrap: wrap;
+
   }
 
   .column {
