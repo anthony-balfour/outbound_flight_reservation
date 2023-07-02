@@ -148,3 +148,72 @@ main {
   font-size: 0.83em;
 }
 
+/* Smaller screen sizes. <950pixels wide. My phone is 300 by 600 */
+
+@media screen and (max-width: 950px) {
+  #flight-details {
+    padding-top: 0;
+  }
+
+  #flight-details h2 {
+    font-size: 1.4rem
+  }
+
+  #flight-places {
+    font-size: 0.9rem;
+    gap: 15px;
+  }
+
+  #company-name h1 {
+    font-size: 2.7rem;
+  }
+
+  #nav-links p {
+    margin-left: 0;
+    margin-right: 15px;
+  }
+
+  #nav-links {
+    gap: 40px;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  main {
+    display: flex;
+    flex-direction: column;
+    height: initial;
+  }
+
+  #company-name {
+    align-self: center;
+    margin-top: 6%;
+    margin-bottom: 6%;
+  }
+
+  nav {
+    margin-bottom: 4.2%;
+  }
+
+  #flight-details {
+    height: 35vh;
+  }
+
+  #nav-links p {
+    margin-left: 0;
+    margin-right: 15px;
+  }
+
+  #nav-links {
+    gap: 40px;
+  }
+}
+
+
+@media screen and (max-width: 440px) {
+  nav p {
+    display: none;
+  }
+
+
+}

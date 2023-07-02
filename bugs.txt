@@ -35,11 +35,14 @@ Finished 6/27
 -reserve card
   finished 6/29
 
+-Added some smaller screen responsiveness
+- 7/1
+
 TODO*************
 
 -logo should be in flex container in the nav
 
--for smaller screens I should adjust deals pictures? not sure why theyre like that 
+-for smaller screens I should adjust deals pictures? not sure why theyre like that
 
 - add styling to flight reserve cards
 

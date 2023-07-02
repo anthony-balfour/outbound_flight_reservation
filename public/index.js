@@ -38,6 +38,34 @@
     fillFlightSuggestions("Los Angeles");
     fillFlightSuggestions("New York");
     fillFlightSuggestions("Austin");
+
+    // move button based on screen size
+    smallScreenButtonMove();
+    smallScreenSectionsMove();
+  }
+
+  /**
+   * Moves the flight details button within the #flight-places section. The original
+   * placement is within the form but outside of #flight-places
+   */
+  function smallScreenButtonMove() {
+    const smallQuery = window.matchMedia("(max-width: 950px)");
+
+    if (smallQuery.matches) {
+      let enterButton = qs("#flight-details button");
+      id("flight-places").appendChild(enterButton);
+      id("round-one-way").classList.add("hidden");
+    }
+  }
+
+  function smallScreenSectionsMove() {
+    const sectionsQuery = window.matchMedia("(max-width: 900px)");
+
+    if (sectionsQuery.matches) {
+      // qs("main").insertBefore(id("company-name"),id("flight-suggestions"));
+      qs("main").insertBefore(id("flight-deals"),id("flight-suggestions"));
+
+    }
   }
 
   /**
@@ -60,7 +88,6 @@
    * @param {Object} destinationJson - JSON of the flight information
    */
   function displayFlight(destinationJson) {
-    console.log(destinationJson);
     // destinationJson[1] is the second flight in the list of flights to the given location
     // this was done for choosing different airline's for the logo look on the landing page
     let flight = destinationJson[1];
@@ -102,7 +129,6 @@
    */
   function flightSuggestion(event, flight) {
     // info in order: location, price, dates, airlines logo
-    console.log(flight);
     let flightDetails = event.currentTarget.children;
     let dates = flightDetails[2].textContent.split("to");
     let startDate = "2023-" + dates[0].split("/").join("-").trim();
