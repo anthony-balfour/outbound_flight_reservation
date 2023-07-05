@@ -58,6 +58,7 @@ main {
   padding: 7px;
   cursor: pointer;
   box-shadow: 2px 2px gray;
+  transition: all 0.1s;
 }
 
 #flight-details button:hover {
@@ -161,6 +162,27 @@ main {
   left: 40px;
   cursor: default;
   font-size: 0.83em;
+}
+
+/* Deal View */
+
+#deal-view {
+  height: 70vh;
+  width: 60vw;
+  border: 1px solid orange;
+  position: absolute;
+  left: 20%;
+  top: 15%;
+}
+
+.deal-image {
+
+}
+
+@keyframes enlarge {
+  100% {
+    transform: translateX()
+  }
 }
 
 /* Smaller screen sizes. <950pixels wide. My phone is 300 by 600 */

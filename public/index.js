@@ -42,6 +42,30 @@
     // move button based on screen size
     smallScreenButtonMove();
     smallScreenSectionsMove();
+
+    // create deal view on deal flight click
+    flightDealsClick();
+
+  }
+
+  /**
+   * Adds click event listener to flight deals images
+   */
+  function flightDealsClick() {
+    qsa("#flight-deals img").forEach(img => {
+      img.addEventListener("click", (event) => {
+        flightDealView(event);
+      });
+    })
+  }
+
+  /**
+   *
+   * @param {event} event - click event on
+   */
+  function flightDealView(event) {
+    let clickedImage = event.currentTarget;
+    clickedImage.classList.add("deal-image");
   }
 
   /**
@@ -64,7 +88,6 @@
     if (sectionsQuery.matches) {
       // qs("main").insertBefore(id("company-name"),id("flight-suggestions"));
       qs("main").insertBefore(id("flight-deals"),id("flight-suggestions"));
-
     }
   }
 

@@ -17,10 +17,33 @@
 /* form */
 
 #create-user, #login {
-  height: 500px;
+  height: 60vh;
   width: 30%;
-  justify-content: space-evenly;
+  justify-content: center;
+  gap: 20px;
   align-items: center;
+  margin: 0;
+  padding: 0;
+}
+
+#login {
+  height: 400px;
+  width: 300px;
+}
+
+/* Create User */
+
+#create-user {
+  height: 500px;
+  width: 400px;
+}
+
+main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 80vh;
 }
 
 button {
@@ -30,4 +53,21 @@ button {
   padding: 7px;
   cursor: pointer;
   box-shadow: 2px 2px gray;
+  align-self: center;
+}
+
+/* Input areas */
+
+#create-user label p, #login label p {
+  margin: 0;
+  margin-bottom: 3px;
+}
+
+#create-user label {
+  margin-left: 50px;
+}
+
+
+input {
+  width: 250px;
 }

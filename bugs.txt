@@ -38,9 +38,13 @@ Finished 6/27
 -Added some smaller screen responsiveness
 - 7/1
 
+- Fixed image sizing on smaller screens
+
 TODO*************
 
 -logo should be in flex container in the nav
+
+-Get menu for smaller screen
 
 -for smaller screens I should adjust deals pictures? not sure why theyre like that
 

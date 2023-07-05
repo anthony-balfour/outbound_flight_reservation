@@ -58,6 +58,7 @@ button {
   align-items: center;
   width: 40%;
   cursor: pointer;
+
 }
 
 .logo {
@@ -72,6 +73,14 @@ button {
 
 article .align-left {
   align-items: start;
+}
+
+.flight-card:hover {
+  /* border-color: rgb(133, 130, 130); */
+  border-width: 2.3px;
+  /* transform: translateY(-7px); */
+
+
 }
 
 /* grid layout styling */
@@ -123,10 +132,16 @@ article .align-left {
   width: 40vw;
   left: 50%;
   height: 45vh;
+  margin-top: 25px;
 }
 
-.reserve-button {
+#reserve div {
+  padding: 10px;
+}
+
+#reserve-button {
   z-index: 10;
+  margin-left: 5px;
 }
 
 /* sign-out message */
