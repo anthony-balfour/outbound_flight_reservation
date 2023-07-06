@@ -31,6 +31,7 @@
       event.preventDefault();
       submitFlight(event);
     })
+
     getFlightsSearch();
     searchClick();
 
@@ -319,7 +320,7 @@
 
     let airlines = generate("p");
     airlines.textContent = flightJson.airline;
-    
+
     flightSelectList(airlines, dates, destination, price, flightJson);
   }
 

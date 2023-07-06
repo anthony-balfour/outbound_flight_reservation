@@ -30,6 +30,10 @@ nav p:hover {
   color: orange;
 }
 
+#login-dropdown p {
+  color: black;
+}
+
 nav a {
   text-decoration: none;
   color: inherit;
@@ -62,6 +66,7 @@ nav a {
 #menu .dropdown p {
   margin: 0;
   padding: 6px;
+  color: black;
 }
 
 #menu .dropdown:hover {
@@ -110,13 +115,15 @@ nav a {
 #menu .dropdown:hover {
   background-color: rgb(230, 156, 20);
   cursor: pointer;
+  color: black;
 }
 
 #menu .dropdown {
-  outline: 1px solid orange;
+  position: absolute;
   padding: 7px;
   width: 75%;
   margin: auto;
+  left: 8.7%;
 }
 
 /* sign-out */
