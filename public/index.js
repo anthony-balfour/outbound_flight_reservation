@@ -61,11 +61,34 @@
 
   /**
    *
-   * @param {event} event - click event on
+   * @param {event} event - click event on flight deal image
    */
   function flightDealView(event) {
     let clickedImage = event.currentTarget;
-    clickedImage.classList.add("deal-image");
+    let imageBoundaries = clickedImage.getBoundingClientRect();
+    let clonedImage = clickedImage.cloneNode();
+    console.log(clonedImage);
+    clonedImage.classList.add("deal-image");
+    clonedImage.style.top = clickedImage.offsetTop + 'px';
+    clonedImage.style.left = clickedImage.offsetLeft + 'px';
+    let imageContainer = clickedImage.parentElement;
+    imageContainer.appendChild(clonedImage);
+    clonedImage.id = "cloned-image"
+
+    console.log("imageBoundaries.height " + imageBoundaries.height);
+    clonedImage.style.height = `${imageBoundaries.height}px`;
+    clonedImage.style.width = `${imageBoundaries.height}px`;
+
+    let nextImageContainer = qs("#deal-view figure");
+    let imageContainerBoundaries = nextImageContainer.getBoundingClientRect();
+    // let leftMove = (imageBoundaries.left - imageContainerBoundaries.left) * -1;
+    // let upMove = (imageBoundaries.top - imageContainerBoundaries.top) * -1;
+    // clickedImage.style.transition = "all 2s";
+    // clickedImage.style.height = `${imageContainerBoundaries.height}px`;
+    // clickedImage.style.width = `${imageContainerBoundaries.width}px`
+    // clickedImage.style.transform = `translate(${leftMove}px, ${upMove}px)`;
+
+    //clickedImage.style.transform = `translateY(${upMove}px)`;
   }
 
   /**
