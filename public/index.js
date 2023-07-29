@@ -60,40 +60,96 @@
   }
 
   /**
-   *
+   * Displays the flight deal view in the center of the screen with 4 panels once a flight deal
+   * is clicked.
    * @param {event} event - click event on flight deal image
    */
   function flightDealView(event) {
     let clickedImage = event.currentTarget;
     let imageBoundaries = clickedImage.getBoundingClientRect();
     let clonedImage = clickedImage.cloneNode();
-    console.log(clonedImage);
     clonedImage.classList.add("deal-image");
     clonedImage.style.top = clickedImage.offsetTop + 'px';
     clonedImage.style.left = clickedImage.offsetLeft + 'px';
     let imageContainer = clickedImage.parentElement;
     imageContainer.appendChild(clonedImage);
-    clonedImage.id = "cloned-image"
-
-    console.log("imageBoundaries.height " + imageBoundaries.height);
-    clonedImage.style.height = `${imageBoundaries.height}px`;
-    clonedImage.style.width = `${imageBoundaries.height}px`;
+    clonedImage.id = "cloned-image";
+    clonedImage.style.height = `${clickedImage.offsetHeight}px`;
+    clonedImage.style.width = `${clickedImage.offsetWidth}px`;
 
     let nextImageContainer = qs("#deal-view figure");
-    let imageContainerBoundaries = nextImageContainer.getBoundingClientRect();
-    // let leftMove = (imageBoundaries.left - imageContainerBoundaries.left) * -1;
-    // let upMove = (imageBoundaries.top - imageContainerBoundaries.top) * -1;
-    // clickedImage.style.transition = "all 2s";
-    // clickedImage.style.height = `${imageContainerBoundaries.height}px`;
-    // clickedImage.style.width = `${imageContainerBoundaries.width}px`
-    // clickedImage.style.transform = `translate(${leftMove}px, ${upMove}px)`;
 
-    //clickedImage.style.transform = `translateY(${upMove}px)`;
-  }
+    let imageContainerBoundaries = nextImageContainer.getBoundingClientRect();
+    let leftMove = (imageBoundaries.left - imageContainerBoundaries.left) * -1;
+    let upMove = (imageBoundaries.top - imageContainerBoundaries.top) * -1;
+    clonedImage.style.transition = "all 2s";
+    clonedImage.style.transform = `translate(${leftMove}px, ${upMove}px)`;
+    clonedImage.style.height = `${imageContainerBoundaries.height}px`;
+    clonedImage.style.width = `${imageContainerBoundaries.width}px`;
+    // qs("main").style.filter = "blur(5px)";
+    fetchFlightDeal(clickedImage.getAttribute("data-flight-id"));
+
+    }
+
+    function fetchFlightDeal(flightId) {
+      let params = new FormData();
+      params.append("id", flightId);
+      fetch("/get_flight", {method: "POST", body: params})
+      .then(statusCheck)
+      .then(res => res.json())
+      .then(displayDealInformation)
+      .catch(handleError);
+    }
+
+    /**
+     * Displays the deal view trip information in the top right panel
+     * and the flight price in the bottom right panel
+     * @param {Object} flightJson
+     */
+    function displayDealInformation(flightJson) {
+      displayDealPrice(flightJson);
+      displayTripInfo(flightJson);
+    }
+
+    //displays the itinerary information for the clicked flight deal on the main page0
+    function displayTripInfo(flightJson) {
+
+      let dealInfo = qs(".details");
+      console.log(dealInfo);
+      // Get all the p tags inside the container
+      const paragraphs = dealInfo.querySelectorAll('p');
+      console.log(paragraphs);
+
+    // Loop through all the paragraphs and remove them
+      paragraphs.forEach(paragraph => paragraph.remove());
+
+      qs(".details h2").textContent = flightJson.destination;
+      let airline = generate("p");
+      airline.textContent = flightJson.airline;
+
+      let startDate = generate("p");
+      startDate.textContent = flightJson.start_date;
+
+      let endDate = generate("p");
+      endDate.textContent = flightJson.end_date;
+      qs(".details").append(airline, startDate, endDate);
+    }
+
+    /**
+     * Displays the given flight price in the bottom right panel of the flight deal display
+     * @param {*} flightJson
+     */
+    function displayDealPrice(flightJson) {
+      let heading = qs(".price").querySelector("h3");
+      heading.textContent = "Deal Price";
+      let price = qs(".price").querySelector("p");
+      price.textContent = "$" + flightJson.price;
+    }
 
   /**
-   * Moves the flight details button within the #flight-places section. The original
-   * placement is within the form but outside of #flight-places
+   * Moves the flight details button within the #flight-places section if the screen size
+   * is less than 950px.
+   * The original placement is within the form but outside of #flight-places
    */
   function smallScreenButtonMove() {
     const smallQuery = window.matchMedia("(max-width: 950px)");
@@ -105,6 +161,9 @@
     }
   }
 
+  /**
+   * Moves
+   */
   function smallScreenSectionsMove() {
     const sectionsQuery = window.matchMedia("(max-width: 900px)");
 
@@ -257,7 +316,7 @@
   function handleError(error) {
     let errorMessage = generate("p");
     errorMessage.textContent = error;
-    qs("main").append(errorMessage);
+    qs("body").append(errorMessage);
   }
 
   /**

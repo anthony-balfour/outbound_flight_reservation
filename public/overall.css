@@ -101,6 +101,10 @@ nav a {
   display: none;
 }
 
+.blur {
+  filter: blur(3px);
+}
+
 /* menu styling */
 
 #menu {
@@ -151,4 +155,5 @@ button:hover {
   box-shadow: 3px 3px grey;
   color: #F5F5F5;
 }
+
 
