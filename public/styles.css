@@ -172,7 +172,6 @@ main {
 #deal-view {
   height: 70vh;
   width: 60vw;
-  border: 1px solid orange;
   position: absolute;
   left: 20%;
   top: 15%;
@@ -183,7 +182,7 @@ main {
   padding: 0;
   z-index: 1;
   background-color: #fff;
-  border: 2px solid black;
+  border: 0.5px solid black;
 }
 
 .deal-image {
@@ -207,10 +206,19 @@ main {
   grid-column: 2 / 3;
   grid-row: 2 / 3;
   margin: 0;
+  padding: 10px;
+}
+
+.price div {
   display: flex;
-  justify-content: center;
-  align-items: center;
   flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+}
+
+.price div > * {
+  margin: 0;
 }
 
 .deal-itinerary {
@@ -221,6 +229,7 @@ main {
 
 .deal {
   border: 1px solid black;
+  box-sizing: border-box;
 }
 
 .price p {
@@ -236,6 +245,19 @@ main {
   cursor: pointer;
   box-shadow: 2px 2px gray;
   transition: all 0.1s;
+}
+
+.itinerary {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.itinerary img {
+  object-fit: cover;
+  height: 100%;
+  width: 50%;
+  border: 2px solid white;
 }
 /* Smaller screen sizes. <950pixels wide. My phone is 300 by 600 */
 

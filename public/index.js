@@ -109,13 +109,14 @@
     function displayDealInformation(flightJson) {
       displayDealPrice(flightJson);
       displayTripInfo(flightJson);
+      addTwoDealImages(flightJson.destination);
     }
 
-    //displays the itinerary information for the clicked flight deal on the main page0
+    //displays the itinerary information for the clicked flight deal on the main page
     function displayTripInfo(flightJson) {
 
       let dealInfo = qs(".details");
-      console.log(dealInfo);
+
       // Get all the p tags inside the container
       const paragraphs = dealInfo.querySelectorAll('p');
       console.log(paragraphs);
@@ -123,16 +124,52 @@
     // Loop through all the paragraphs and remove them
       paragraphs.forEach(paragraph => paragraph.remove());
 
+
       qs(".details h2").textContent = flightJson.destination;
+
+      // airline information
+      let airlineContainer = generate("div");
       let airline = generate("p");
       airline.textContent = flightJson.airline;
+      let header = generate("p");
+      header.textContent = "Airline";
+      airlineContainer.append(header, airline);
 
+
+      // start date information
+      let header2 = generate("p");
+      header2.textContent = "Start Date"
       let startDate = generate("p");
       startDate.textContent = flightJson.start_date;
+      let startDateContainer = generate("div");
+      startDateContainer.append(header2, startDate);
 
+      // end date information
+      let header3 = generate("p");
+      header3.textContent = "End Date";
       let endDate = generate("p");
       endDate.textContent = flightJson.end_date;
-      qs(".details").append(airline, startDate, endDate);
+      let endDateContainer = generate("div");
+      endDateContainer.append(header3, endDate);
+      
+      qs(".details").append(airlineContainer, header2, startDate, header3, endDate);
+    }
+
+    /**
+     * Adds two images to the lower left panel of the deal view once a location is clicked
+     * @param {String} destination
+     */
+    function addTwoDealImages(destination) {
+      let imageContainer = qs(".itinerary");
+      if (destination == "Italy") {
+        let pantheon = generate("img");
+        pantheon.src = "images/pantheon.jpg";
+        pantheon.alt = "Roman Pantheon";
+        let caracalla = generate("Img");
+        caracalla.src = "images/caracalla.jpg";
+        caracalla.alt = "Roman Baths of Caracalla";
+        imageContainer.append(pantheon,caracalla);
+      }
     }
 
     /**
