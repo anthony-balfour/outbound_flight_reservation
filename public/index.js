@@ -65,6 +65,18 @@
    * @param {event} event - click event on flight deal image
    */
   function flightDealView(event) {
+    id("deal-view").classList.remove("hidden");
+
+    // adding close option to deal view X button
+
+    qs("#deal-view span").addEventListener("click", () => {
+      id("deal-view").classList.add("hidden");
+      id("cloned-image").remove();
+    })
+
+    if (qs("#cloned-image")) {
+      id("cloned-image").remove();
+    }
     let clickedImage = event.currentTarget;
     let imageBoundaries = clickedImage.getBoundingClientRect();
     let clonedImage = clickedImage.cloneNode();
@@ -86,11 +98,16 @@
     clonedImage.style.transform = `translate(${leftMove}px, ${upMove}px)`;
     clonedImage.style.height = `${imageContainerBoundaries.height}px`;
     clonedImage.style.width = `${imageContainerBoundaries.width}px`;
-    // qs("main").style.filter = "blur(5px)";
+    // qs("main").style.filter = "blur(5px);
+
     fetchFlightDeal(clickedImage.getAttribute("data-flight-id"));
 
     }
 
+    /**
+     * API request to get information on the selected deal flight
+     * @param {String} flightId - ID of the selected deal flight
+     */
     function fetchFlightDeal(flightId) {
       let params = new FormData();
       params.append("id", flightId);
@@ -112,64 +129,98 @@
       addTwoDealImages(flightJson.destination);
     }
 
-    //displays the itinerary information for the clicked flight deal on the main page
+    /**
+     * Displays the trip/flight information in the top right panel of the deal view
+     * @param {Object} flightJson
+     */
     function displayTripInfo(flightJson) {
 
       let dealInfo = qs(".details");
+      dealInfo.innerHTML = "";
 
-      // Get all the p tags inside the container
-      const paragraphs = dealInfo.querySelectorAll('p');
-      console.log(paragraphs);
+      let destination = generate("h2");
+     destination.textContent = flightJson.destination;
 
-    // Loop through all the paragraphs and remove them
-      paragraphs.forEach(paragraph => paragraph.remove());
+      let info = generate("section");
 
-
-      qs(".details h2").textContent = flightJson.destination;
 
       // airline information
       let airlineContainer = generate("div");
       let airline = generate("p");
       airline.textContent = flightJson.airline;
+      airline.classList.add("deal-text");
       let header = generate("p");
-      header.textContent = "Airline";
-      airlineContainer.append(header, airline);
+      header.textContent = "Airline ";
+      let line = generate("hr");
+      header.classList.add("deal-text");
+      airlineContainer.append(header, line, airline);
 
+      // dates information
+      let start = flightJson.start_date.split("-");
+      let end = flightJson.end_date.split("-");
+      let dates = start[1] + "/" + start[2] + " to " + end[1] + "/" + end[2];
+      let dateContainer = generate("div");
+      let dateHeader = generate("p");
+      dateHeader.textContent = "Dates";
+      let line2 = generate("hr");
+      dateHeader.classList.add("deal-text");
+      dateContainer.append(dateHeader, line2, dates);
 
-      // start date information
-      let header2 = generate("p");
-      header2.textContent = "Start Date"
-      let startDate = generate("p");
-      startDate.textContent = flightJson.start_date;
-      let startDateContainer = generate("div");
-      startDateContainer.append(header2, startDate);
+      //tickets
+      let ticketHeader = generate("p");
+      ticketHeader.textContent = "Tickets";
 
-      // end date information
-      let header3 = generate("p");
-      header3.textContent = "End Date";
-      let endDate = generate("p");
-      endDate.textContent = flightJson.end_date;
-      let endDateContainer = generate("div");
-      endDateContainer.append(header3, endDate);
-      
-      qs(".details").append(airlineContainer, header2, startDate, header3, endDate);
+      ticketHeader.classList.add("deal-text");
+      let numTickets = generate("p");
+      numTickets.textContent = "2";
+      let ticketsContainer = generate("div");
+      let line3 = generate("hr");
+      numTickets.classList.add("deal-text");
+
+      ticketsContainer.append(ticketHeader, line3, numTickets);
+
+      info.append(airlineContainer, dateContainer, ticketsContainer);
+      qs(".details").append(destination, info);
     }
 
     /**
      * Adds two images to the lower left panel of the deal view once a location is clicked
-     * @param {String} destination
+     * @param {String}
      */
     function addTwoDealImages(destination) {
+
       let imageContainer = qs(".itinerary");
+      imageContainer.innerHTML = "";
       if (destination == "Italy") {
-        let pantheon = generate("img");
-        pantheon.src = "images/pantheon.jpg";
-        pantheon.alt = "Roman Pantheon";
-        let caracalla = generate("Img");
-        caracalla.src = "images/caracalla.jpg";
-        caracalla.alt = "Roman Baths of Caracalla";
-        imageContainer.append(pantheon,caracalla);
+        displayTwoImages("images/pantheon.jpg","Roman Pantheon",
+          "images/caracalla.jpg", "Roman Baths of Caracalla");
+      } else if (destination == "Phuket") {
+        displayTwoImages("images/elephants.jpg","Thai Elephants",
+          "images/kohsamui.jpg", "Koh Samui");
+      } else if (destination == "Manila") {
+        displayTwoImages("images/palawan.jpg","Palawan Beach",
+          "images/diving.jpg", "Diver at Palawan");
       }
+    }
+
+    /**
+     * Displays the two images in the bottom left panel of deal view
+     * @param {String} src1 - File path for first image in the two images in the bottom left panel
+     *  of deal view
+     * @param {String} alt1 - Alt description for image 1
+     * @param {String} src2 - File path for the second image in the two images in the bottom left
+     * panel of deal view
+     * @param {String} alt2 - Alt description for image 2
+     */
+    function displayTwoImages(src1, alt1, src2, alt2) {
+      let imageContainer = qs(".itinerary");
+      let img1 = generate("img");
+      let img2 = generate("img");
+      img1.src = src1;
+      img1.alt = alt1;
+      img2.src = src2;
+      img2.alt = alt2;
+      imageContainer.append(img1, img2);
     }
 
     /**
@@ -233,6 +284,7 @@
     // destinationJson[1] is the second flight in the list of flights to the given location
     // this was done for choosing different airline's for the logo look on the landing page
     let flight = destinationJson[1];
+    console.log(flight);
     if (destinationJson[1].location === "Austin") {
       flight = destinationJson[3]
     }
@@ -246,11 +298,11 @@
     endDate = endDate[1] + "/" + endDate[2];
     date.textContent = startDate + " to " + endDate;
     price.textContent = "$" + flight.price;
-    price.classList.add("price");
     location.textContent = flight.location;
     logo.src = "/images/" + flight.airline.toLowerCase() + ".png";
     logo.classList.add("logo");
     logo.alt = flight.airline + " logo";
+
     // sets flight container value to name of location
     // on the html page there are id's for LA, NY, and Austin as default suggestions
     let flightLocation = flight.location.toLowerCase().split(" ").join("-");
@@ -273,8 +325,10 @@
     // info in order: location, price, dates, airlines logo
     let flightDetails = event.currentTarget.children;
     let dates = flightDetails[2].textContent.split("to");
-    let startDate = "2023-" + dates[0].split("/").join("-").trim();
-    let endDate = "2023-" + dates[1].split("/").join("-").trim();
+    let startYear = flight.start_date.split("-")[0];
+    let endYear = flight.end_date.split("-")[0];
+    let startDate =  startYear + "-" + dates[0].split("/").join("-").trim();
+    let endDate = endYear + "-" + dates[1].split("/").join("-").trim();
     let destination = flightDetails[0].textContent;
     localStorage.setItem("flight-suggestion", "true");
     localStorage.setItem("destination", destination);
@@ -351,9 +405,10 @@
    * @param {String} error
    */
   function handleError(error) {
-    let errorMessage = generate("p");
-    errorMessage.textContent = error;
-    qs("body").append(errorMessage);
+    console.log(error);
+    // let errorMessage = generate("p");
+    // errorMessage.textContent = error;
+    // qs("body").append(errorMessage);
   }
 
   /**
@@ -407,15 +462,15 @@
     }
   }
 
-  /**
-   * Displays the error when fetching the flight suggestions in the flight
-   * suggestions section
-   */
-  function handleError(error) {
-    let errorMessage = generate("p");
-    errorMessage.textContent = error;
-    id("flight-suggestions").append(errorMessage);
-  }
+  // /**
+  //  * Displays the error when fetching the flight suggestions in the flight
+  //  * suggestions section
+  //  */
+  // function handleError(error) {
+  //   let errorMessage = generate("p");
+  //   errorMessage.textContent = error;
+  //   id("flight-suggestions").append(errorMessage);
+  // }
 
   /**
    * Finds the element with the specified selector

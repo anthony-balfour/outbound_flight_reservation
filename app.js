@@ -57,6 +57,8 @@ app.get("/flightslist", async (req, res) => {
         res.json(flightResults);
       }
     } else if (destination) {
+
+
       let flightsQuery = "SELECT flights.id, flights.price, flights.airline, flights.destination_id, flights.return_id, flights.start_date, flights.end_date, flights.capacity, locations.location FROM flights, locations where flights.start_date >= date() AND " +
       "locations.id = destination_id AND locations.location = ? AND flights.capacity > 0";
       let flightResults = await db.all(flightsQuery, [destination]);

@@ -182,7 +182,11 @@ main {
   padding: 0;
   z-index: 1;
   background-color: #fff;
-  border: 0.5px solid black;
+  border: 0.5px solid rgb(176, 172, 172);
+}
+
+#deal-view.hidden {
+  display: none;
 }
 
 .deal-image {
@@ -196,10 +200,44 @@ main {
   margin: 0;
 }
 
-.deal.details{
+.deal.details {
   grid-column: 2 / 3;
   grid-row: 1 / 2;
   margin: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  padding-left: 10px;
+}
+
+.details h2 {
+  align-self: center;
+  font-size: 2.5rem;
+}
+
+.details p {
+  margin: 0;
+  padding: 0;
+}
+
+.details section {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  gap: 55px;
+}
+
+#deal-view span {
+  position: absolute;
+  right: 9px;
+  top: 9px;
+  font-size: 1.7rem;
+}
+
+#deal-view span:hover {
+  cursor: pointer;
+  color: teal;
 }
 
 .deal.price {
@@ -207,6 +245,15 @@ main {
   grid-row: 2 / 3;
   margin: 0;
   padding: 10px;
+}
+
+.details hr {
+  width: 100px;
+}
+
+.details .deal-text {
+  text-align: center;
+
 }
 
 .price div {
@@ -221,6 +268,10 @@ main {
   margin: 0;
 }
 
+#deal-view {
+  backdrop-filter: blur(10px);
+}
+
 .deal-itinerary {
   grid-column: 1 / 2;
   grid-row: 2 / 3;
@@ -228,7 +279,7 @@ main {
 }
 
 .deal {
-  border: 1px solid black;
+  border: 1px solid rgb(176, 172, 172);;
   box-sizing: border-box;
 }
 
@@ -259,6 +310,7 @@ main {
   width: 50%;
   border: 2px solid white;
 }
+
 /* Smaller screen sizes. <950pixels wide. My phone is 300 by 600 */
 
 @media screen and (max-width: 950px) {
