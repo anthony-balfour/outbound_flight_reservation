@@ -1,10 +1,10 @@
 /**
  * Name: Anthony Balfour
- * Date: 6/2/ 2023
+ * Date: 6/2/2023
  *
  * This javascript file, index.js, handles functionality for handling the input
- * for entering flight detail information, clicking links such as flight deals and
- * flight suggestions, and navbar interactivity.
+ * for entering flight detail information to look at avaialable flights, managing a separate
+ * view for flight deals, showing flight suggestions, and navbar interactivity.
  */
 
 "use strict";
@@ -18,18 +18,20 @@
    * Fills the three flight suggestions in the bottom left of the page
    */
   function init() {
+    // adds submit event to flight reservation details form
     qs("#flight-details form").addEventListener("submit", (event) => {
       event.preventDefault();
       submitFlight(event);
     })
 
+    // changes login to account if a user is logged in
     changeLoginToAccount();
 
-    // clearing signin/create_user attribute of local storage
+    // clearing sign-in/create-user attributes of local storage
     localStorage.removeItem("sign-in");
     localStorage.removeItem("create-user");
 
-    // enabling sign out
+    // enabling sign out when clicking the menu button
     if (localStorage.getItem("logged-in")) {
       menuEventListener();
     }
@@ -39,17 +41,128 @@
     fillFlightSuggestions("New York");
     fillFlightSuggestions("Austin");
 
-    // move button based on screen size
+    // move the submit button for the flight details reservation form based on screen size
+    // moves the sections around for smaller screens
     smallScreenButtonMove();
     smallScreenSectionsMove();
 
-    // create deal view on deal flight click
+    // create deal view on deal flight click which is centered on the screen
     flightDealsClick();
+  }
 
+  /*** Flight Reservation Form ***/
+
+  /**
+   * Submits the flight details form and then directs to the "flights.html" page which will be populated
+   * by flights within the given criteria.
+   * Saves the input information to local storage to use on the flights.html page.
+   * @param {event} event - click on the "Enter" button in the flight details section
+   */
+  function submitFlight(event) {
+    let destination = event.target[1].value;
+    localStorage.setItem("destination", destination);
+    localStorage.setItem("startDate", event.target[2].value);
+    localStorage.setItem("endDate", event.target[3].value);
+    localStorage.setItem("roundTrip", qs("#flight-details select").value);
+    window.location.href="flights.html";
+  }
+
+  /***************** Flight Suggestions *******************/
+
+  /**
+   * Fills in the flight suggestion card in the flight suggestions section
+   * @param {String} destination - destination of the selected flight
+   */
+  function fillFlightSuggestions(destination) {
+    fetch("/flightslist?destination=" + destination)
+      .then(statusCheck)
+      .then(res => res.json())
+      .then(displayFlight)
+      .catch(handleError);
   }
 
   /**
-   * Adds click event listener to flight deals images
+   * Displays the flight information of the suggested flight.
+   * - airline logo
+   * - price
+   * - dates
+   * @param {Object} destinationJson - JSON of the flight
+   */
+  function displayFlight(destinationJson) {
+    // destinationJson[1] is the second flight in the list of flights to the given location
+    // this was done for choosing different airline logo looks for the landing page
+    let flight = destinationJson[1];
+    if (destinationJson[1].location === "Austin") {
+      flight = destinationJson[3]
+    }
+
+    // logo
+    let logo = generate("img");
+    logo.src = "/images/" + flight.airline.toLowerCase() + ".png";
+    logo.classList.add("logo");
+    logo.alt = flight.airline + " logo";
+
+    // price
+    let price = generate("p");
+    price.textContent = "$" + flight.price;
+
+    // dates
+    let date = generate("p");
+    let startDate = flight.start_date.split("-")
+    startDate = startDate[1] + "/" + startDate[2];
+    let endDate = flight.end_date.split("-")
+    endDate = endDate[1] + "/" + endDate[2];
+    date.textContent = startDate + " to " + endDate;
+
+    // location
+    let location = generate("p");
+    location.textContent = flight.location;
+
+
+    let flightLocation = flight.location.toLowerCase().split(" ").join("-");
+    // On the html page there are id's for los-angeles, new-york, and Austin as default suggestions
+    id(flightLocation).classList.add("flight-card");
+    id(flightLocation).addEventListener("click", (event) => {
+      flightSuggestion(event, flight);
+    });
+    id(flightLocation).append(location, price, date, logo);
+  }
+
+  /**
+   * Directs the user to the "flights.html" webpage and directly to the reserve view for the
+   * selected flight.
+   * Sets the flight id, airline, and dates to local storage
+   * @param {event} event - "click" on flight suggestions flight on landing page
+   */
+  function flightSuggestion(event, flight) {
+    // info in order: location, price, dates, airlines logo
+    let flightDetails = event.currentTarget.children;
+
+    // dates
+    let dates = flightDetails[2].textContent.split("to");
+    let startYear = flight.start_date.split("-")[0];
+    let endYear = flight.end_date.split("-")[0];
+    let startDate =  startYear + "-" + dates[0].split("/").join("-").trim();
+    let endDate = endYear + "-" + dates[1].split("/").join("-").trim();
+
+    //destination
+    let destination = flightDetails[0].textContent;
+
+    localStorage.setItem("flight-suggestion", "true");
+    localStorage.setItem("destination", destination);
+    localStorage.setItem("startDate", startDate);
+    localStorage.setItem("endDate", endDate);
+    localStorage.setItem("flight-id", flight.id);
+    localStorage.setItem("price", flight.price);
+
+    // directs to "flights.html" webpage
+    window.location.href="flights.html";
+  }
+
+  /********************* Flight Deals *********************/
+
+  /**
+   * Adds a "click" event listener to the flight deals images (Italy, Thailand, Phillipines)
    */
   function flightDealsClick() {
     qsa("#flight-deals img").forEach(img => {
@@ -60,52 +173,36 @@
   }
 
   /**
-   * Displays the flight deal view in the center of the screen with 4 panels once a flight deal
+   * Displays the flight deal view in the center of the screen with 4 panels once a flight deal image
    * is clicked.
    * @param {event} event - click event on flight deal image
    */
   function flightDealView(event) {
+
+    // fetches the flight information of the selected location
+    fetchFlightDeal(clickedImage.getAttribute("data-flight-id"));
+
     id("deal-view").classList.remove("hidden");
 
-    // adding close option to deal view X button
-
+    // adding close option to deal-view "X" close button
     qs("#deal-view span").addEventListener("click", () => {
       id("deal-view").classList.add("hidden");
       id("cloned-image").remove();
     })
 
+    // removes deal view image if already present
     if (qs("#cloned-image")) {
       id("cloned-image").remove();
     }
-    let clickedImage = event.currentTarget;
-    let imageBoundaries = clickedImage.getBoundingClientRect();
-    let clonedImage = clickedImage.cloneNode();
-    clonedImage.classList.add("deal-image");
-    clonedImage.style.top = clickedImage.offsetTop + 'px';
-    clonedImage.style.left = clickedImage.offsetLeft + 'px';
-    let imageContainer = clickedImage.parentElement;
-    imageContainer.appendChild(clonedImage);
-    clonedImage.id = "cloned-image";
-    clonedImage.style.height = `${clickedImage.offsetHeight}px`;
-    clonedImage.style.width = `${clickedImage.offsetWidth}px`;
 
-    let nextImageContainer = qs("#deal-view figure");
-
-    let imageContainerBoundaries = nextImageContainer.getBoundingClientRect();
-    let leftMove = (imageBoundaries.left - imageContainerBoundaries.left) * -1;
-    let upMove = (imageBoundaries.top - imageContainerBoundaries.top) * -1;
-    clonedImage.style.transition = "all 2s";
-    clonedImage.style.transform = `translate(${leftMove}px, ${upMove}px)`;
-    clonedImage.style.height = `${imageContainerBoundaries.height}px`;
-    clonedImage.style.width = `${imageContainerBoundaries.width}px`;
-    // qs("main").style.filter = "blur(5px);
-
-    fetchFlightDeal(clickedImage.getAttribute("data-flight-id"));
-
+    // moves the clicked image to the deal view container
+    createMovingImageEffect(event);
     }
 
     /**
-     * API request to get information on the selected deal flight
+     * Gets information on the flight with the given flight ID with an API request
+     * Displays that information to the price panel, the flight details panel,
+     * and the panel with two images of the destination
      * @param {String} flightId - ID of the selected deal flight
      */
     function fetchFlightDeal(flightId) {
@@ -121,7 +218,8 @@
     /**
      * Displays the deal view trip information in the top right panel
      * and the flight price in the bottom right panel
-     * @param {Object} flightJson
+     * displays two images of the location in the bottom left panel
+     * @param {Object} flightJson - JSON of the flight
      */
     function displayDealInformation(flightJson) {
       displayDealPrice(flightJson);
@@ -130,19 +228,49 @@
     }
 
     /**
+     * Moves the clicked image to the upper left deal view panel and enlarges it as it moves to fit
+     * the ensuing container
+     * @param {event} event - the image clicked on out of the three deal options
+     * presented on the landing page
+     */
+    function createMovingImageEffect(event) {
+      // moving image from flight deal container to deal view panel container
+    let clickedImage = event.currentTarget;
+    let imageBoundaries = clickedImage.getBoundingClientRect();
+
+    // setting cloned image on top of the same image
+    let clonedImage = clickedImage.cloneNode();
+    clonedImage.classList.add("deal-image");
+    clonedImage.style.top = clickedImage.offsetTop + 'px';
+    clonedImage.style.left = clickedImage.offsetLeft + 'px';
+    let imageContainer = clickedImage.parentElement;
+    imageContainer.appendChild(clonedImage);
+    clonedImage.id = "cloned-image";
+    clonedImage.style.height = `${clickedImage.offsetHeight}px`;
+    clonedImage.style.width = `${clickedImage.offsetWidth}px`;
+
+    // moving cloned image to figure container in the deal-view
+    let nextImageContainer = qs("#deal-view figure");
+    let imageContainerBoundaries = nextImageContainer.getBoundingClientRect();
+    let leftMove = (imageBoundaries.left - imageContainerBoundaries.left) * -1;
+    let upMove = (imageBoundaries.top - imageContainerBoundaries.top) * -1;
+    clonedImage.style.transition = "all 2s";
+    clonedImage.style.transform = `translate(${leftMove}px, ${upMove}px)`;
+    clonedImage.style.height = `${imageContainerBoundaries.height}px`;
+    clonedImage.style.width = `${imageContainerBoundaries.width}px`;
+    }
+
+    /**
      * Displays the trip/flight information in the top right panel of the deal view
-     * @param {Object} flightJson
+     * @param {Object} flightJson - JSON info of the given flight
      */
     function displayTripInfo(flightJson) {
+     // clearing the details panel whenever a flight deal image is clicked
+      qs(".details").innerHTML = "";
 
-      let dealInfo = qs(".details");
-      dealInfo.innerHTML = "";
-
+      // setting destination header
       let destination = generate("h2");
      destination.textContent = flightJson.destination;
-
-      let info = generate("section");
-
 
       // airline information
       let airlineContainer = generate("div");
@@ -150,7 +278,7 @@
       airline.textContent = flightJson.airline;
       airline.classList.add("deal-text");
       let header = generate("p");
-      header.textContent = "Airline ";
+      header.textContent = "Airline";
       let line = generate("hr");
       header.classList.add("deal-text");
       airlineContainer.append(header, line, airline);
@@ -169,23 +297,22 @@
       //tickets
       let ticketHeader = generate("p");
       ticketHeader.textContent = "Tickets";
-
       ticketHeader.classList.add("deal-text");
       let numTickets = generate("p");
       numTickets.textContent = "2";
       let ticketsContainer = generate("div");
       let line3 = generate("hr");
       numTickets.classList.add("deal-text");
-
       ticketsContainer.append(ticketHeader, line3, numTickets);
 
+      let info = generate("section");
       info.append(airlineContainer, dateContainer, ticketsContainer);
       qs(".details").append(destination, info);
     }
 
     /**
-     * Adds two images to the lower left panel of the deal view once a location is clicked
-     * @param {String}
+     * Adds two images of the destination to the lower left panel of the deal view once a location is clicked
+     * @param {String} destination - destination of the selected flight deal
      */
     function addTwoDealImages(destination) {
 
@@ -225,7 +352,7 @@
 
     /**
      * Displays the given flight price in the bottom right panel of the flight deal display
-     * @param {*} flightJson
+     * @param {Object} flightJson- Flight json information including price
      */
     function displayDealPrice(flightJson) {
       let heading = qs(".price").querySelector("h3");
@@ -234,14 +361,16 @@
       price.textContent = "$" + flightJson.price;
     }
 
+/*** Smaller Screen Responsiveness ***/
+
   /**
-   * Moves the flight details button within the #flight-places section if the screen size
-   * is less than 950px.
-   * The original placement is within the form but outside of #flight-places
+   * Moves the flight details button into the #flight-places form section if the screen size
+   * is less than 950px. This is so the button is not hanging outside of the given flight reservation
+   * section
+   * The original placement is within the form but outside of #flight-places section.
    */
   function smallScreenButtonMove() {
     const smallQuery = window.matchMedia("(max-width: 950px)");
-
     if (smallQuery.matches) {
       let enterButton = qs("#flight-details button");
       id("flight-places").appendChild(enterButton);
@@ -250,112 +379,21 @@
   }
 
   /**
-   * Moves
+   * Moves flight deals before flight suggestions if the screen is smaller than 900px
+   * This is for page layout flow
    */
   function smallScreenSectionsMove() {
     const sectionsQuery = window.matchMedia("(max-width: 900px)");
-
     if (sectionsQuery.matches) {
       // qs("main").insertBefore(id("company-name"),id("flight-suggestions"));
       qs("main").insertBefore(id("flight-deals"),id("flight-suggestions"));
     }
   }
 
-  /**
-   * Fills in the flight suggestion card in the flight suggestions section
-   * @param {String} destination
-   */
-  function fillFlightSuggestions(destination) {
-    fetch("/flightslist?destination=" + destination)
-      .then(statusCheck)
-      .then(res => res.json())
-      .then(displayFlight)
-      .catch(handleError);
-  }
+  /********************** Navbar Section ************************/
 
   /**
-   * Displays the flight information of the suggested flight:
-   * logo
-   * price
-   * date
-   * @param {Object} destinationJson - JSON of the flight information
-   */
-  function displayFlight(destinationJson) {
-    // destinationJson[1] is the second flight in the list of flights to the given location
-    // this was done for choosing different airline's for the logo look on the landing page
-    let flight = destinationJson[1];
-    console.log(flight);
-    if (destinationJson[1].location === "Austin") {
-      flight = destinationJson[3]
-    }
-    let logo = generate("img");
-    let price = generate("p");
-    let date = generate("p");
-    let location = generate("p");
-    let startDate = flight.start_date.split("-")
-    startDate = startDate[1] + "/" + startDate[2];
-    let endDate = flight.end_date.split("-")
-    endDate = endDate[1] + "/" + endDate[2];
-    date.textContent = startDate + " to " + endDate;
-    price.textContent = "$" + flight.price;
-    location.textContent = flight.location;
-    logo.src = "/images/" + flight.airline.toLowerCase() + ".png";
-    logo.classList.add("logo");
-    logo.alt = flight.airline + " logo";
-
-    // sets flight container value to name of location
-    // on the html page there are id's for LA, NY, and Austin as default suggestions
-    let flightLocation = flight.location.toLowerCase().split(" ").join("-");
-
-    // in the index.html page, each container has the id of the suggested location
-    id(flightLocation).classList.add("flight-card");
-    id(flightLocation).addEventListener("click", (event) => {
-      flightSuggestion(event, flight);
-    });
-    id(flightLocation).append(location, price, date, logo);
-  }
-
-  /**
-   * Directs the user to the "flights.html" webpage and directly to the reserve view for the
-   * selected flight.
-   * Sets the flight id, airline, and dates to local storage
-   * @param {event} event - click on flight suggestions flight on landing page
-   */
-  function flightSuggestion(event, flight) {
-    // info in order: location, price, dates, airlines logo
-    let flightDetails = event.currentTarget.children;
-    let dates = flightDetails[2].textContent.split("to");
-    let startYear = flight.start_date.split("-")[0];
-    let endYear = flight.end_date.split("-")[0];
-    let startDate =  startYear + "-" + dates[0].split("/").join("-").trim();
-    let endDate = endYear + "-" + dates[1].split("/").join("-").trim();
-    let destination = flightDetails[0].textContent;
-    localStorage.setItem("flight-suggestion", "true");
-    localStorage.setItem("destination", destination);
-    localStorage.setItem("startDate", startDate);
-    localStorage.setItem("endDate", endDate);
-    localStorage.setItem("flight-id", flight.id);
-    localStorage.setItem("price", flight.price);
-    window.location.href="flights.html";
-  }
-
-  /**
-   * Submits the flight details form and then directs to the flights page which will be populated
-   * by flights within the given criteria.
-   * Saves the input information to local storage to use on the flights.html page.
-   * @param {event} event - click on the "Enter" button in the flight details section
-   */
-  function submitFlight(event) {
-    let destination = event.target[1].value;
-    localStorage.setItem("destination", destination);
-    localStorage.setItem("startDate", event.target[2].value);
-    localStorage.setItem("endDate", event.target[3].value);
-    localStorage.setItem("roundTrip", qs("#flight-details select").value);
-    window.location.href="flights.html";
-  }
-
-  /**
-   * Adds a click event listener to the login option in the navbar
+   * Adds a "click" event listener to the "login" option in the navbar
    */
   function loginEventListener() {
     id("login").addEventListener("click", loginDropdown);
@@ -363,7 +401,7 @@
 
   /**
    * Displays the login options in the login dropdown
-   * The two options are login and create user
+   * The two options are "login" and "create user"
    */
   function loginDropdown() {
     let dropdown = id("login-dropdown");
@@ -400,19 +438,21 @@
     });
   }
 
-  /**
-   * Displays error message to the page
-   * @param {String} error
+    /**
+   * Changes the "login" option in the navbar to "Account" if a user is logged in
    */
-  function handleError(error) {
-    console.log(error);
-    // let errorMessage = generate("p");
-    // errorMessage.textContent = error;
-    // qs("body").append(errorMessage);
-  }
+    function changeLoginToAccount() {
+      if(localStorage.getItem("logged-in")){
+        id("login").href = "account.html";
+        qs("#login p").textContent = "Account";
+      } else {
+        qs("#login p").textContent = "Login";
+        loginEventListener();
+      }
+    }
 
   /**
-   * Enables drop down menu when selecting menu in the navbar
+   * Enables drop down menu when selecting "menu" in the navbar
    */
   function menuEventListener() {
     qs("#menu p").addEventListener("click", menuDropdown);
@@ -420,7 +460,8 @@
   }
 
   /**
-   * Shows the menu dropdown in the navbar
+   * Shows the "menu" dropdown in the navbar. It contains the option of
+   * "sign out"
    */
   function menuDropdown() {
     let menuDropdown = qs("#menu .dropdown");
@@ -429,7 +470,7 @@
 
   /**
    * Signs the user out, displays a signed out message,
-   * and directs the user to the homepage. The sign out is not visible
+   * and directs the user to the homepage. The "sign out" option is not visible
    * if no user is logged in
    */
   function signOut() {
@@ -449,28 +490,18 @@
 
   }
 
-  /**
-   * Changes the login option in the navbar to account if a user is logged in
+   /**
+   * Displays error message to the page
+   * @param {String} error
    */
-  function changeLoginToAccount() {
-    if(localStorage.getItem("logged-in")){
-      id("login").href = "account.html";
-      qs("#login p").textContent = "Account";
-    } else {
-      qs("#login p").textContent = "Login";
-      loginEventListener();
-    }
+   function handleError(error) {
+    console.log(error);
+    // let errorMessage = generate("p");
+    // errorMessage.textContent = error;
+    // qs("body").append(errorMessage);
   }
 
-  // /**
-  //  * Displays the error when fetching the flight suggestions in the flight
-  //  * suggestions section
-  //  */
-  // function handleError(error) {
-  //   let errorMessage = generate("p");
-  //   errorMessage.textContent = error;
-  //   id("flight-suggestions").append(errorMessage);
-  // }
+  /*** Helper Functions ***/
 
   /**
    * Finds the element with the specified selector
