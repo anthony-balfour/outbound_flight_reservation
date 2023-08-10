@@ -142,8 +142,6 @@ main {
   box-sizing: border-box;
 }
 
-
-
 #flight-deals img:hover {
   transform: scale(1.02);
 }
@@ -152,7 +150,8 @@ main {
   height: 100%;
   width: 100%;
 }
-/*Sign in options styling styling */
+
+/* Sign in options styling styling */
 
 #sign-in, #create-user {
   white-space: nowrap;
@@ -180,52 +179,20 @@ main {
   grid-template-rows: 50% 50%;
   margin: 0;
   padding: 0;
-  z-index: 1;
+  z-index: 10;
   background-color: #fff;
   border: 0.5px solid rgb(176, 172, 172);
 }
 
-#deal-view.hidden {
-  display: none;
-}
+  /* upper left image */
 
 .deal-image {
   position: absolute;
   z-index: 101;
 }
 
-#deal-view figure {
-  grid-column: 1 / 2;
-  grid-row: 1 / 2;
-  margin: 0;
-}
-
-.deal.details {
-  grid-column: 2 / 3;
-  grid-row: 1 / 2;
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-  align-items: center;
-  padding-left: 10px;
-}
-
-.details h2 {
-  align-self: center;
-  font-size: 2.5rem;
-}
-
-.details p {
-  margin: 0;
-  padding: 0;
-}
-
-.details section {
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-  gap: 55px;
+#deal-view.hidden {
+  display: none;
 }
 
 #deal-view span {
@@ -240,11 +207,43 @@ main {
   color: teal;
 }
 
-.deal.price {
-  grid-column: 2 / 3;
-  grid-row: 2 / 3;
+#deal-view figure {
+  grid-column: 1 / 2;
+  grid-row: 1 / 2;
   margin: 0;
-  padding: 10px;
+}
+
+.deal {
+  border: 1px solid rgb(176, 172, 172);;
+  box-sizing: border-box;
+}
+
+.deal.details {
+  grid-column: 2 / 3;
+  grid-row: 1 / 2;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  padding-left: 10px;
+}
+
+.details p {
+  margin: 0;
+  padding: 0;
+}
+
+.details section {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  gap: 55px;
+}
+
+.details h2 {
+  align-self: center;
+  font-size: 2.5rem;
 }
 
 .details hr {
@@ -253,7 +252,13 @@ main {
 
 .details .deal-text {
   text-align: center;
+}
 
+.deal.price {
+  grid-column: 2 / 3;
+  grid-row: 2 / 3;
+  margin: 0;
+  padding: 10px;
 }
 
 .price div {
@@ -266,21 +271,6 @@ main {
 
 .price div > * {
   margin: 0;
-}
-
-#deal-view {
-  backdrop-filter: blur(10px);
-}
-
-.deal-itinerary {
-  grid-column: 1 / 2;
-  grid-row: 2 / 3;
-  margin: 0;
-}
-
-.deal {
-  border: 1px solid rgb(176, 172, 172);;
-  box-sizing: border-box;
 }
 
 .price p {
@@ -298,6 +288,12 @@ main {
   transition: all 0.1s;
 }
 
+.deal-itinerary {
+  grid-column: 1 / 2;
+  grid-row: 2 / 3;
+  margin: 0;
+}
+
 .itinerary {
   display: flex;
   align-items: center;
@@ -310,6 +306,25 @@ main {
   width: 50%;
   border: 2px solid white;
 }
+
+#blur {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  /* backdrop-filter: blur(10px); */
+  background-color: rgb(197, 194, 194);
+  opacity: 0.6;
+}
+
+/* #deal-view {
+  backdrop-filter: blur(4px);
+} */
+
+
+
+
 
 /* Smaller screen sizes. <950pixels wide. My phone is 300 by 600 */
 
@@ -380,7 +395,6 @@ main {
     margin-bottom: 50px;
   }
 }
-
 
 @media screen and (max-width: 440px) {
 

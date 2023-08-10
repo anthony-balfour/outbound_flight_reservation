@@ -1,6 +1,6 @@
 /**
  * Name: Anthony Balfour
- * Date: 6/2/ 2023
+ * Date: 6/2/2023
  *
  * This javascript file, flights.js, lists all of the available flights specified with
  * the given criteria (dates, price, airlines). The list can be viewed in list style or
@@ -55,7 +55,7 @@
   }
 
   /**
-   * Gets the values of the searched items on the landing page or in the
+   * Gets the values of the searched items on the landing page from local storage or in the
    * flight details section at the top of the webpage. Populates
    * the page with the flights that met the selected criteria. Fetches using
    * the given start date, end date and destination, if any are provided.
@@ -167,6 +167,7 @@
   }
 
   /**
+   * Selects a flight for possible reservation.
    * In list style: displays a flight reservation card which gives the option to reserve the flight.
    * In grid style: displays a reserve button at the bottom of the grid card
    * @param {event} event - click event on the each flight card displayed

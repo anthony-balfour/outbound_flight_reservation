@@ -1,6 +1,6 @@
 /**
  * Name: Anthony Balfour
- * Date: 6/2/2023
+ * Date: 8/7/2023
  *
  * This javascript file, index.js, handles functionality for handling the input
  * for entering flight detail information to look at avaialable flights, managing a separate
@@ -178,7 +178,11 @@
    * @param {event} event - click event on flight deal image
    */
   function flightDealView(event) {
-
+    let blur = generate("div");
+    blur.id = "blur";
+    qs("main").appendChild(blur);
+    // qs("main").style.filter = "blur(5px)";
+    let clickedImage = event.currentTarget;
     // fetches the flight information of the selected location
     fetchFlightDeal(clickedImage.getAttribute("data-flight-id"));
 
@@ -188,6 +192,7 @@
     qs("#deal-view span").addEventListener("click", () => {
       id("deal-view").classList.add("hidden");
       id("cloned-image").remove();
+      id("blur").remove();
     })
 
     // removes deal view image if already present
@@ -438,18 +443,18 @@
     });
   }
 
-    /**
+  /**
    * Changes the "login" option in the navbar to "Account" if a user is logged in
    */
-    function changeLoginToAccount() {
-      if(localStorage.getItem("logged-in")){
-        id("login").href = "account.html";
-        qs("#login p").textContent = "Account";
-      } else {
-        qs("#login p").textContent = "Login";
-        loginEventListener();
-      }
+  function changeLoginToAccount() {
+    if(localStorage.getItem("logged-in")){
+      id("login").href = "account.html";
+      qs("#login p").textContent = "Account";
+    } else {
+      qs("#login p").textContent = "Login";
+      loginEventListener();
     }
+  }
 
   /**
    * Enables drop down menu when selecting "menu" in the navbar
