@@ -48,6 +48,9 @@
 
     // create deal view on deal flight click which is centered on the screen
     flightDealsClick();
+
+    // opens the mobile menu
+    openMobileMenu();
   }
 
   /*** Flight Reservation Form ***/
@@ -185,8 +188,9 @@
     let clickedImage = event.currentTarget;
     // fetches the flight information of the selected location
     fetchFlightDeal(clickedImage.getAttribute("data-flight-id"));
-
     id("deal-view").classList.remove("hidden");
+
+
 
     // adding close option to deal-view "X" close button
     qs("#deal-view span").addEventListener("click", () => {
@@ -397,6 +401,25 @@
 
   /********************** Navbar Section ************************/
 
+  function openMobileMenu() {
+    let menuBar = id("menu-bar");
+    let mobileMenu = id("mobile-menu");
+    menuBar.addEventListener("click", () => {
+      mobileMenu.classList.toggle("show-mobile-menu");
+
+      // ability to close the menu
+      closeMobileMenu();
+    })
+  }
+
+  function closeMobileMenu() {
+    let xIcon = id("mobile-close");
+    let mobileMenu = id("mobile-menu");
+    console.log(xIcon);
+    xIcon.addEventListener("click", () => {
+      mobileMenu.classList.remove("show-mobile-menu");
+    })
+  }
   /**
    * Adds a "click" event listener to the "login" option in the navbar
    */

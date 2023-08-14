@@ -58,6 +58,10 @@ nav a {
   align-items: center;
 }
 
+#menu-bar {
+  visibility: hidden;
+}
+
 #menu {
   position: relative;
   max-width: min-content;
@@ -73,6 +77,7 @@ nav a {
   background-color: rgb(230, 156, 20);
   cursor: pointer;
 }
+
 
 /* page styling */
 
@@ -154,6 +159,24 @@ nav a {
 button:hover {
   box-shadow: 3px 3px grey;
   color: #F5F5F5;
+}
+
+/* navbar change from row of links to clickable menu bar button  */
+@media screen and (max-width: 650px) {
+  header nav #nav-links {
+    display: none;
+  }
+
+  body header nav {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+  }
+
+  body nav #menu-bar {
+    cursor: pointer;
+    visibility: visible;
+  }
 }
 
 
