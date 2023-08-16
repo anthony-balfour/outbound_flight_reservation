@@ -435,4 +435,25 @@ main {
   }
 }
 
-@media screen and (max-width: 382px) {}
+/* adjusting phillipines deal card to align with other deal cards */
+@media screen and (max-width: 382px) {
+  #deal-flights div:nth-child(2) p {
+    padding: 0;
+    margin: 5px;
+  }
+  #deal-flights div:nth-child(2)  {
+    height: 195px;
+  }
+
+  /* #flight-deals, #deal-flights {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  }
+
+  #flight-deals img {
+    height: 100px;
+    width: 80vw;
+  } */
+}

@@ -58,7 +58,6 @@ button {
   align-items: center;
   width: 40%;
   cursor: pointer;
-
 }
 
 .logo {
@@ -152,4 +151,12 @@ article .align-left {
 
 .sign-out-message-two {
   top: 130px;
+}
+
+/* flight card styling for longer widths on smaller screens, default is 40% */
+
+@media screen and (max-width: 900px) {
+  .flight-card {
+    width: 63%;
+  }
 }
