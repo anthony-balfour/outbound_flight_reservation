@@ -160,3 +160,14 @@ article .align-left {
     width: 63%;
   }
 }
+
+@media screen and (max-width: 500px) {
+  .flight-card {
+    width: 80%;
+    font-size: 0.8em;
+  }
+
+  .price {
+    font-size: 1rem;
+  }
+}

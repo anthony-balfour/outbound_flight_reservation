@@ -51,6 +51,7 @@
 
     // opens the mobile menu
     openMobileMenu();
+    adjustMobileMenu();
   }
 
   /*** Flight Reservation Form ***/
@@ -399,27 +400,6 @@
     }
   }
 
-  /********************** Navbar Section ************************/
-
-  function openMobileMenu() {
-    let menuBar = id("menu-bar");
-    let mobileMenu = id("mobile-menu");
-    menuBar.addEventListener("click", () => {
-      mobileMenu.classList.toggle("show-mobile-menu");
-
-      // ability to close the menu
-      closeMobileMenu();
-    })
-  }
-
-  function closeMobileMenu() {
-    let xIcon = id("mobile-close");
-    let mobileMenu = id("mobile-menu");
-    console.log(xIcon);
-    xIcon.addEventListener("click", () => {
-      mobileMenu.classList.remove("show-mobile-menu");
-    })
-  }
   /**
    * Adds a "click" event listener to the "login" option in the navbar
    */

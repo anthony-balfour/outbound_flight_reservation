@@ -6,6 +6,8 @@
 
   function init() {
     openMobileMenu();
+    adjustMobileMenu();
+    mobileMenuPages();
   }
 
   function openMobileMenu() {
@@ -26,6 +28,32 @@
     console.log(xIcon);
     xIcon.addEventListener("click", () => {
       mobileMenu.classList.remove("show-mobile-menu");
+    })
+  }
+
+  function adjustMobileMenu() {
+    let mobileLogin = id("mobile-login");
+    let mobileCreate = id("mobile-create");
+    let mobileAccount = id("mobile-account");
+    let mobileSignOut = id("mobile-sign-out");
+    if (localStorage.getItem("logged-in")) {
+      mobileLogin.classList.add("hidden");
+      mobileCreate.classList.add("hidden");
+    } else {
+      mobileAccount.classList.add("hidden");
+      mobileSignOut.classList.add("hidden");
+    }
+  }
+
+  /**
+   * Directs the client to the clicked pages of
+   * -create user
+   */
+  function mobileMenuPages() {
+    let mobileCreate = id("mobile-create");
+    mobileCreate.addEventListener("click", () => {
+      localStorage.setItem("create-user", "yes");
+      window.location.href = "login.html";
     })
   }
 
