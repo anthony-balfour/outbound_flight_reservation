@@ -238,7 +238,8 @@ main {
   display: flex;
   justify-content: space-evenly;
   align-items: center;
-  gap: 55px;
+  max-width: 100%;
+  gap: 10px;
 }
 
 .details h2 {

@@ -38,36 +38,41 @@ app.get("/flightslist", async (req, res) => {
   let startDate = req.query["start_date"];
   let endDate = req.query["end_date"];
   let destination = req.query.destination;
+  let selectFlightsLocationQuery = "SELECT flights.id, flights.price, flights.airline, " +
+  "flights.destination_id, flights.return_id, flights.start_date, flights.end_date, " +
+  "flights.capacity, locations.location ";
   try {
     if (startDate && destination) {
       if (endDate) {
-        let flightsQuery = "SELECT * FROM flights, locations WHERE flights.start_date >= ? AND flights.end_date <= ? " +
+        let flightsQuery = selectFlightsLocationQuery + "FROM flights, locations WHERE flights.start_date >= ? AND flights.end_date <= ? " +
         "AND locations.location = ? " +
         "AND locations.id = flights.destination_id " +
         "AND flights.capacity > 0";
         let flightResults = await db.all(flightsQuery, [startDate, endDate, destination]);
+        console.log(flightResults);
         res.json(flightResults);
       }
       else {
         let flightsQuery =
-        "SELECT * FROM flights, locations WHERE flights.start_date >= ? AND ? = locations.location " +
+        selectFlightsLocationQuery + " FROM flights, locations WHERE flights.start_date >= ? AND ? = locations.location " +
         "AND flights.destination_id = locations.id " +
         "AND flights.capacity > 0";
         let flightResults = await db.all(flightsQuery, [startDate, destination]);
         res.json(flightResults);
       }
     } else if (destination) {
-
-
-      let flightsQuery = "SELECT flights.id, flights.price, flights.airline, flights.destination_id, flights.return_id, flights.start_date, flights.end_date, flights.capacity, locations.location FROM flights, locations where flights.start_date >= date() AND " +
+      let flightsQuery = selectFlightsLocationQuery +
+      "FROM flights, locations where flights.start_date >= date() AND " +
       "locations.id = destination_id AND locations.location = ? AND flights.capacity > 0";
       let flightResults = await db.all(flightsQuery, [destination]);
       res.json(flightResults);
+      console.log(flightResults);
     } else {
-      let flightsQuery = "SELECT * FROM flights, locations where flights.start_date >= date() AND " +
+      let flightsQuery = selectFlightsLocationQuery + "FROM flights, locations where flights.start_date >= date() AND " +
       "locations.id = destination_id AND flights.capacity > 0";
       let flightResults = await db.all(flightsQuery);
       res.json(flightResults);
+      console.log(flightResults);
     }
     await db.close();
   } catch {

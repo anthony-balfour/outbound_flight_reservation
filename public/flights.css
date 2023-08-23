@@ -78,10 +78,11 @@ article .align-left {
   /* border-color: rgb(133, 130, 130); */
   border-width: 2.3px;
   /* transform: translateY(-7px); */
-
-
 }
 
+.align-self {
+  align-self: flex-start;
+}
 /* grid layout styling */
 
 .grid {

@@ -14,6 +14,9 @@
   // sets the intial flights display as list style, this can be changed to grid
   let listStyle = "list";
 
+  let windowWidth = window.innerWidth;
+
+
   window.addEventListener("load", init);
 
   /**
@@ -32,7 +35,10 @@
       submitFlight(event);
     })
 
+    // populates the page with the flights
     getFlightsSearch();
+
+    //functionality for searching through flights
     searchClick();
 
     // clears the align left property that occurs when a flight is selected
@@ -52,6 +58,8 @@
 
     // flight suggestions
     flightSuggestion();
+
+    // sets flight display to grid if the window is less than 600px
   }
 
   /**
@@ -111,6 +119,7 @@
    * information
    */
   function displayFlights(flightsJson) {
+    console.log(flightsJson);
     let flightsContainer = id("available-flights");
     flightsJson.forEach(flight => {
     let flightContainer = constructFlightCard(flight);
@@ -121,6 +130,11 @@
 
     // enables event listener for clicking grid icon on page above flights list
     attachGridListener();
+
+    // sets the flight display to grid if window size is less than 600px
+    if (windowWidth < 600) {
+      grid();
+    }
   }
 
   /**
@@ -179,7 +193,7 @@
    */
   function flightSelect(event, airline, date, location, price, flight) {
     localStorage.setItem("flight-id", flight.id);
-
+    let target = event.currentTarget;
     // clearing selected flight info container
     if( id("flight-info")){
       id("flight-info").innerHTML = "";
@@ -196,8 +210,11 @@
       }
 
     if (listStyle === "list") {
-      flightSelectList(airline, date, location, price, flight);
-
+      if (windowWidth >= 900) {
+        flightSelectList(airline, date, location, price, flight);
+      } else {
+        flightSelectListSmall(target);
+      }
       // if (listStyle === "grid")
     } else {
       flightSelectGrid(event);
@@ -232,6 +249,21 @@
     let reserve = generate("h3").textContent = "Would you like to reserve this flight?"
     container.append(reserveHeader, location, newAirline, date, capacity, price, reserve);
     id("reserve").prepend(container);
+  }
+
+  function flightSelectListSmall(target) {
+    if (qs(".align-self")) {
+      id("reserve-copy").remove();
+      qs(".align-self").classList.remove("align-self");
+    }
+    target.classList.add("align-self");
+    let buttonCopy = id("reserve-button").cloneNode(true);
+    buttonCopy.id = "reserve-copy";
+    target.style.position = 'relative';
+    buttonCopy.style.position = 'absolute';
+    target.appendChild(buttonCopy);
+    buttonCopy.style.left = '102%';
+    buttonCopy.addEventListener("click", reserveFlight);
   }
 
   /**
@@ -322,7 +354,11 @@
     let airlines = generate("p");
     airlines.textContent = flightJson.airline;
 
-    flightSelectList(airlines, dates, destination, price, flightJson);
+    if(windowWidth >= 900) {
+      flightSelectList(airlines, dates, destination, price, flightJson);
+    } else {
+      flightSelectListSmall
+    }
   }
 
   /**
@@ -429,7 +465,7 @@
   }
 
   /**
-   * Displays the lsit of flights in a vertical list
+   * Displays the list of flights in a vertical list
    */
   function list() {
     if (qs(".need-login")){
