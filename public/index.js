@@ -50,8 +50,8 @@
     flightDealsClick();
 
     // opens the mobile menu
-    openMobileMenu();
-    adjustMobileMenu();
+    // openMobileMenu();
+    // adjustMobileMenu();
   }
 
   /*** Flight Reservation Form ***/

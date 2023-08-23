@@ -12,7 +12,6 @@
 
   function openMobileMenu() {
     let menuBar = id("menu-bar");
-    console.log(menuBar);
     let mobileMenu = id("mobile-menu");
     menuBar.addEventListener("click", () => {
       mobileMenu.classList.toggle("show-mobile-menu");

@@ -119,13 +119,12 @@
    * information
    */
   function displayFlights(flightsJson) {
-    console.log(flightsJson);
     let flightsContainer = id("available-flights");
     flightsJson.forEach(flight => {
     let flightContainer = constructFlightCard(flight);
     flightsContainer.appendChild(flightContainer);
     })
-    // storing the original featured flights list in this function as a parameter
+    // storing the original featured flights list in this function as a para
     filterSelect(qsa(".flight-card"));
 
     // enables event listener for clicking grid icon on page above flights list
@@ -145,6 +144,7 @@
    */
   function constructFlightCard(flight) {
     let flightContainer = generate("div");
+    flightContainer.id = flight.id;
     let logo = generate("img");
     let price = generate("p");
     let airline = generate("p");
@@ -217,7 +217,7 @@
       }
       // if (listStyle === "grid")
     } else {
-      flightSelectGrid(event);
+      flightSelectGrid(event.currentTarget);
     }
   }
 
@@ -253,8 +253,10 @@
 
   function flightSelectListSmall(target) {
     if (qs(".align-self")) {
-      id("reserve-copy").remove();
       qs(".align-self").classList.remove("align-self");
+    }
+    if (id("reserve-copy")) {
+      id("reserve-copy").remove();
     }
     target.classList.add("align-self");
     let buttonCopy = id("reserve-button").cloneNode(true);
@@ -271,20 +273,20 @@
    * when in grid view
    * @param {event} event - click event on the each flight card displayed
    */
-  function flightSelectGrid(event) {
+  function flightSelectGrid(currentTarget) {
     if (id("available-flights").classList.contains("align-left")) {
       id("available-flights").classList.remove("align-left");
     }
 
       // If the selected flight card does not have a reserve button, a 5th child node
-      if(!event.currentTarget.childNodes[5]){
+      if(!currentTarget.childNodes[5]){
         let reserveButton = generate("button");
         reserveButton.textContent = "Reserve";
         reserveButton.classList.add("reserve-button");
         reserveButton.addEventListener("click", reserveFlight);
 
         // appending the reserve button to the grid card
-        event.currentTarget.appendChild(reserveButton);
+        currentTarget.appendChild(reserveButton);
     }
   }
 
@@ -357,7 +359,14 @@
     if(windowWidth >= 900) {
       flightSelectList(airlines, dates, destination, price, flightJson);
     } else {
-      flightSelectListSmall
+      let target = id(localStorage.getItem("flight-id"));
+      console.log(listStyle);
+      if (listStyle == "list") {
+        flightSelectListSmall(target);
+      }else {
+        id("available-flights").prepend(target);
+        flightSelectGrid(target);
+      }
     }
   }
 
@@ -448,6 +457,9 @@
    * Displays the list of flights in a grid.
    */
   function grid() {
+    if(id("reserve-copy")) {
+      id("reserve-copy").remove();
+    }
     listStyle = "grid";
     id("reserve").classList.add("hidden");
     attachListListener();
@@ -468,8 +480,15 @@
    * Displays the list of flights in a vertical list
    */
   function list() {
+    // if a need to login message was onscreen then removes the message
     if (qs(".need-login")){
       qs(".need-login").remove();
+    }
+
+    // removes left alignment of selected flight from list view on mobile view
+    // if one was selected then the grid view was selected
+    if (qs(".align-self")) {
+      qs(".align-self").classList.remove("align-self");
     }
     if (listStyle === "grid") {
       id("available-flights").classList.remove("align-left");

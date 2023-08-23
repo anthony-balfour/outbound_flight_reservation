@@ -49,7 +49,6 @@ app.get("/flightslist", async (req, res) => {
         "AND locations.id = flights.destination_id " +
         "AND flights.capacity > 0";
         let flightResults = await db.all(flightsQuery, [startDate, endDate, destination]);
-        console.log(flightResults);
         res.json(flightResults);
       }
       else {
@@ -66,13 +65,11 @@ app.get("/flightslist", async (req, res) => {
       "locations.id = destination_id AND locations.location = ? AND flights.capacity > 0";
       let flightResults = await db.all(flightsQuery, [destination]);
       res.json(flightResults);
-      console.log(flightResults);
     } else {
       let flightsQuery = selectFlightsLocationQuery + "FROM flights, locations where flights.start_date >= date() AND " +
       "locations.id = destination_id AND flights.capacity > 0";
       let flightResults = await db.all(flightsQuery);
       res.json(flightResults);
-      console.log(flightResults);
     }
     await db.close();
   } catch {
