@@ -163,7 +163,7 @@
     location.classList.add("location");
     logo.src = "/images/" + flight.airline.toLowerCase() + ".png";
     logo.classList.add("logo");
-    logo.alt = flight.airline + " logo";
+    logo.alt = flight.airline + "logo";
     flightContainer.classList.add("lightgray-border");
     flightContainer.classList.add("flight-card");
     let airlineClone = airline.cloneNode(true);

@@ -198,6 +198,7 @@ button:hover {
 #mobile-close {
   cursor: pointer;
 }
+
 /* navbar change from row of links to clickable menu bar button  */
 @media screen and (max-width: 650px) {
   header nav #nav-links {

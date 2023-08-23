@@ -7,7 +7,7 @@
   function init() {
     openMobileMenu();
     adjustMobileMenu();
-    mobileMenuPages();
+    mobileLoginPage();
   }
 
   function openMobileMenu() {
@@ -45,15 +45,28 @@
   }
 
   /**
-   * Directs the client to the clicked pages of
-   * -create user
+   * If the client is not logged in, sets event listeners to
+   * the login and create user option in the mobile menu bar
    */
-  function mobileMenuPages() {
-    let mobileCreate = id("mobile-create");
-    mobileCreate.addEventListener("click", () => {
-      localStorage.setItem("create-user", "yes");
-      window.location.href = "login.html";
-    })
+  function mobileLoginPage() {
+    let create = localStorage.getItem("create-user");
+    let loggedIn = localStorage.getItem("logged-in");
+    if(!loggedIn) {
+      id("mobile-login").addEventListener("click", () => {
+        if (create) {
+          localStorage.removeItem("create-user");
+        }
+        localStorage.setItem("sign-in", "true");
+        window.location.href="login.html";
+      });
+      id("mobile-create").addEventListener("click", () => {
+        if (localStorage.getItem("sign-in")) {
+          localStorage.removeItem("sign-in");
+        }
+        localStorage.setItem("create-user", "true");
+        window.location.href="login.html";
+      });
+    }
   }
 
   /**
