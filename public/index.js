@@ -189,16 +189,24 @@
     let clickedImage = event.currentTarget;
     // fetches the flight information of the selected location
     fetchFlightDeal(clickedImage.getAttribute("data-flight-id"));
-    id("deal-view").classList.remove("hidden");
 
-
-
-    // adding close option to deal-view "X" close button
+    // showing mobile deal view if window is less than 900px
+    if (window.innerWidth < 900) {
+      id("mobile-deal-view").classList.remove("hidden");
+      qs("#mobile-deal-view span").addEventListener("click", () => {
+        id("mobile-deal-view").classList.add("hidden");
+        id("cloned-image").remove();
+        id("blur").remove();
+      })
+    } else {
+      id("deal-view").classList.remove("hidden");
+      // adding close option to deal-view "X" close button
     qs("#deal-view span").addEventListener("click", () => {
       id("deal-view").classList.add("hidden");
       id("cloned-image").remove();
       id("blur").remove();
     })
+    }
 
     // removes deal view image if already present
     if (qs("#cloned-image")) {
@@ -229,12 +237,26 @@
      * Displays the deal view trip information in the top right panel
      * and the flight price in the bottom right panel
      * displays two images of the location in the bottom left panel
+     * If the screen is in mobile mode, displays the separate mobile panel
      * @param {Object} flightJson - JSON of the flight
      */
     function displayDealInformation(flightJson) {
+      if (window.innerWidth <= 900) {
+        mobileDealDisplay(flightJson);
+      } else {
       displayDealPrice(flightJson);
       displayTripInfo(flightJson);
       addTwoDealImages(flightJson.destination);
+      }
+    }
+
+    /**
+     * Displays the mobile deal view when the screen is less than 900px wide
+     * @param {Object} flightJson - Flight information
+     */
+    function mobileDealDisplay(flightJson) {
+      console.log(flightJson);
+      qs("#mobile-title h2").textContent = flightJson.destination;
     }
 
     /**
@@ -261,7 +283,13 @@
 
     // moving cloned image to figure container in the deal-view
     let nextImageContainer = qs("#deal-view figure");
+    if (window.innerWidth < 900) {
+      nextImageContainer = id("mobile-deal-img");
+    }
     let imageContainerBoundaries = nextImageContainer.getBoundingClientRect();
+    console.log(imageContainerBoundaries);
+    console.log("image top:" + imageBoundaries.top);
+    console.log("container-top: " + imageContainerBoundaries.top);
     let leftMove = (imageBoundaries.left - imageContainerBoundaries.left) * -1;
     let upMove = (imageBoundaries.top - imageContainerBoundaries.top) * -1;
     clonedImage.style.transition = "all 2s";

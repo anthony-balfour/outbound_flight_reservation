@@ -184,6 +184,44 @@ main {
   border: 0.5px solid rgb(176, 172, 172);
 }
 
+/* Mobile Deal View */
+
+#mobile-deal-view {
+  height: 70vh;
+  width: 85vw;
+  position: absolute;
+  left: 8%;
+  top: 15%;
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+  z-index: 10;
+  box-sizing: border-box;
+  border: 0.5px solid rgb(176, 172, 172);
+}
+
+#mobile-deal-view section {
+  border: 1px solid black;
+}
+
+#mobile-deal-view span {
+  position: absolute;
+  right: 15px;
+  top: 15px;
+  font-size: 2rem;
+}
+
+#mobile-deal-view.hidden {
+  display: none;
+}
+
+#mobile-deal-img {
+  height: 300px;
+  width: 100%;
+  outline: 2px solid green;
+}
+
   /* upper left image */
 
 .deal-image {
@@ -423,7 +461,7 @@ main {
 
   #flight-deals img {
     height: 140px;
-    max-height: 140px;
+    /* max-height: 140px; */
   }
 
   #flight-deals section {
