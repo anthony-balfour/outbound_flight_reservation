@@ -187,8 +187,9 @@
     qs("main").appendChild(blur);
     // qs("main").style.filter = "blur(5px)";
     let clickedImage = event.currentTarget;
+
     // fetches the flight information of the selected location
-    fetchFlightDeal(clickedImage.getAttribute("data-flight-id"));
+    fetchFlightDeal(clickedImage.getAttribute("data-flight-id"))
 
     // showing mobile deal view if window is less than 900px
     if (window.innerWidth < 900) {
@@ -255,7 +256,7 @@
      * @param {Object} flightJson - Flight information
      */
     function mobileDealDisplay(flightJson) {
-      qs("#mobile-title h2").textContent = flightJson.destination;
+      qs("#mobile-title p").textContent = flightJson.destination;
 
       // setting price display
       qs("#mobile-details > p").textContent = "$" + flightJson.price;

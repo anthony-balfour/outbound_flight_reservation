@@ -198,8 +198,8 @@ main {
   padding: 0;
   z-index: 10;
   box-sizing: border-box;
-  background-color: rgb(152, 146, 140);
-  border: 0.5px solid rgb(176, 172, 172);
+  background-color: white;
+  border: 0.5px solid teal;
 }
 
 #mobile-deal-view section {
@@ -220,7 +220,7 @@ main {
 #mobile-title {
   height: 11%;
   padding-left: 10px;
-  font-size: 0.8em;
+  font-size: 1em;
 }
 
 #mobile-deal-img {
@@ -392,7 +392,7 @@ main {
   left: 0;
   width: 100%;
   height: 100%;
-  /* backdrop-filter: blur(10px); */
+  /* backdrop-filter: blur(8px); */
   background-color: rgb(197, 194, 194);
   opacity: 0.6;
 }
