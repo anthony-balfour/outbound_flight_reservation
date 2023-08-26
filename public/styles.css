@@ -188,7 +188,7 @@ main {
 
 #mobile-deal-view {
   height: 70vh;
-  width: 85vw;
+  width: 80vw;
   position: absolute;
   left: 8%;
   top: 15%;
@@ -198,28 +198,68 @@ main {
   padding: 0;
   z-index: 10;
   box-sizing: border-box;
+  background-color: rgb(152, 146, 140);
   border: 0.5px solid rgb(176, 172, 172);
 }
 
 #mobile-deal-view section {
-  border: 1px solid black;
+  border: 0.5px solid rgb(176, 172, 172);
 }
 
 #mobile-deal-view span {
   position: absolute;
   right: 15px;
   top: 15px;
-  font-size: 2rem;
+  font-size: 1.6rem;
 }
 
 #mobile-deal-view.hidden {
   display: none;
 }
 
+#mobile-title {
+  height: 11%;
+  padding-left: 10px;
+  font-size: 0.8em;
+}
+
 #mobile-deal-img {
-  height: 300px;
-  width: 100%;
-  outline: 2px solid green;
+  height: 40%;
+  width: 99.9%;
+}
+
+#mobile-deal-view button:hover {
+  color: white;
+}
+
+/* details section */
+#mobile-deal-view section:nth-child(3){
+  height: 39%;
+}
+
+#mobile-details > p {
+  text-align: center;
+  font-size: 2rem;
+  color: teal;
+}
+
+#mobile-details img {
+  height: 100px;
+  width: 120px;
+  object-fit: contain;
+}
+
+#mobile-details div {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+#mobile-button {
+  height: 10%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
   /* upper left image */
@@ -317,7 +357,7 @@ main {
   color: teal;
 }
 
-.price button {
+.price button, #mobile-deal-view button {
   background-color: teal;
   border-radius: 4px;
   border: none;

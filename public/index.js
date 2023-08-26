@@ -255,8 +255,19 @@
      * @param {Object} flightJson - Flight information
      */
     function mobileDealDisplay(flightJson) {
-      console.log(flightJson);
       qs("#mobile-title h2").textContent = flightJson.destination;
+
+      // setting price display
+      qs("#mobile-details > p").textContent = "$" + flightJson.price;
+
+      // airline logo
+      qs("#mobile-details img").src = "/images/" + flightJson.airline.toLowerCase().trim() + ".png";
+
+      // dates
+      let date = qs("#mobile-details div p");
+      let startDate = flightJson.start_date.split("-");
+      let endDate = flightJson.end_date.split("-");
+      date.textContent = startDate[1] + "/" + startDate[2] + " - " + endDate[1] + "/" + endDate[2];
     }
 
     /**
@@ -287,9 +298,6 @@
       nextImageContainer = id("mobile-deal-img");
     }
     let imageContainerBoundaries = nextImageContainer.getBoundingClientRect();
-    console.log(imageContainerBoundaries);
-    console.log("image top:" + imageBoundaries.top);
-    console.log("container-top: " + imageContainerBoundaries.top);
     let leftMove = (imageBoundaries.left - imageContainerBoundaries.left) * -1;
     let upMove = (imageBoundaries.top - imageContainerBoundaries.top) * -1;
     clonedImage.style.transition = "all 2s";
