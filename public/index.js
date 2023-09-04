@@ -260,12 +260,13 @@
           dealViewSubmitFlight(flightJson);
         })
       } else {
-      displayDealPrice(flightJson);
-      displayTripInfo(flightJson);
-      addTwoDealImages(flightJson.destination);
-      qs("#deal-view button").addEventListener("click", (flightJson) => {
-        dealViewSubmitFlight(flightJson);
-      })
+        displayDealPrice(flightJson);
+        displayTripInfo(flightJson);
+        addTwoDealImages(flightJson.destination);
+        qs("#deal-view button").addEventListener("click", (flightJson) => {
+          dealViewSubmitFlight(flightJson);
+        });
+      }
     }
 
     /**
