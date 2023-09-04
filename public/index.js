@@ -71,6 +71,17 @@
     window.location.href="flights.html";
   }
 
+  /**
+   * Submits the flight and directs the user to the flights page with the flight deal information
+   * @param {Object} flightJson - JSON of flight information
+   */
+  function dealViewSubmitFlight(flightJson) {
+    localStorage.setItem("destination", flightJson.destination);
+    localStorage.setItem("startDate", flightJson.start_date);
+    localStorage.setItem("endDate", flightJson.end_date);
+    window.location.href="flights.html";
+  }
+
   /***************** Flight Suggestions *******************/
 
   /**
@@ -239,16 +250,22 @@
      * and the flight price in the bottom right panel
      * displays two images of the location in the bottom left panel
      * If the screen is in mobile mode, displays the separate mobile panel
+     * Adds functionality to book button when directing to flights page
      * @param {Object} flightJson - JSON of the flight
      */
     function displayDealInformation(flightJson) {
       if (window.innerWidth <= 900) {
         mobileDealDisplay(flightJson);
+        qs("#mobile-deal-view button").addEventListener("click", (flightJson) => {
+          dealViewSubmitFlight(flightJson);
+        })
       } else {
       displayDealPrice(flightJson);
       displayTripInfo(flightJson);
       addTwoDealImages(flightJson.destination);
-      }
+      qs("#deal-view button").addEventListener("click", (flightJson) => {
+        dealViewSubmitFlight(flightJson);
+      })
     }
 
     /**
