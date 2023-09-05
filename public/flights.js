@@ -318,8 +318,9 @@
   }
 
   /**
-   * Brings up the reserve option for the selected flight from flight suggestions on the
-   * landing page. Fetches the flight ID using the id stored in localStorage.
+   * Brings up the reserve option for the selected flight from flight suggestions
+   * OR deal view on the home page ("index.html").
+   * Fetches the flight ID using the id stored in localStorage.
    */
   function flightSuggestion() {
     if (localStorage.getItem("flight-suggestion") === "true") {
@@ -336,6 +337,7 @@
   /**
    * Constructs the flight reservation panel if the flight suggestion
    * card was selected on the index.html homepage
+   * OR if the flight deal view booking option was selected in the deal view
    * @param {Object} flightJson - all JSON information about the selected flight
    * including price, destination, dates, airlines
    */
@@ -348,10 +350,10 @@
     dates.textContent = startDate + " to " + endDate;
 
     let destination = generate("p");
-    destination.textContent = localStorage.getItem("destination");
+    destination.textContent = flightJson.destination;
 
     let price = generate("p");
-    price.textContent = "$" + localStorage.getItem("price");
+    price.textContent = "$" + flightJson.price;
 
     let airlines = generate("p");
     airlines.textContent = flightJson.airline;
@@ -360,7 +362,6 @@
       flightSelectList(airlines, dates, destination, price, flightJson);
     } else {
       let target = id(localStorage.getItem("flight-id"));
-      console.log(listStyle);
       if (listStyle == "list") {
         flightSelectListSmall(target);
       }else {

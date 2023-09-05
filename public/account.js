@@ -71,7 +71,11 @@
  */
   function displayUserInfo(userInfo) {
     qs("aside h1").textContent = userInfo["first name"] + " " + userInfo["last name"];
-    qs("aside h1:nth-child(2)").textContent = "Welcome!"
+    let welcome = qs("aside h1:nth-child(2)");
+    welcome.textContent = "Welcome!";
+    if (window.innerWidth < 700) {
+      qs("#account-container aside").prepend(welcome);
+    }
     id("account").textContent = "Account Number: " + userInfo.id;
   }
 

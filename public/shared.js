@@ -8,6 +8,7 @@
     openMobileMenu();
     adjustMobileMenu();
     mobileLoginPage();
+    mobileLogOut();
   }
 
   function openMobileMenu() {
@@ -24,7 +25,6 @@
   function closeMobileMenu() {
     let xIcon = id("mobile-close");
     let mobileMenu = id("mobile-menu");
-    console.log(xIcon);
     xIcon.addEventListener("click", () => {
       mobileMenu.classList.remove("show-mobile-menu");
     })
@@ -67,6 +67,20 @@
         window.location.href="login.html";
       });
     }
+  }
+
+  /**
+   * Logs the user out using the sign out from the mobile menu
+   * and directs the user instantly to the homepage
+   */
+  function mobileLogOut() {
+    if (!id("mobile-sign-out").classList.contains("hidden")) {
+      id("mobile-sign-out").addEventListener("click", () => {
+        localStorage.removeItem("logged-in");
+        window.location.href = "index.html";
+      })
+    }
+
   }
 
   /**

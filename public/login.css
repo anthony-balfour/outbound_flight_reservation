@@ -20,8 +20,8 @@
   height: 60vh;
   width: 30%;
   justify-content: center;
-  gap: 20px;
   align-items: center;
+  gap: 20px;
   margin: 0;
   padding: 0;
 }
@@ -36,6 +36,32 @@
 #create-user {
   height: 500px;
   width: 400px;
+}
+
+#create-user h1 {
+  font-size: 1.5rem;
+  margin-bottom: 5px;
+}
+
+@media screen and (max-width: 550px) {
+  #create-user {
+    width: 300px;
+  }
+
+  #create-user h1 {
+    font-size: 1.4rem;
+    margin-bottom: 5px;
+  }
+}
+
+#create-user label {
+  font-size: 0.9rem;
+}
+
+#create-user #expedia-logo {
+  height: 9%;
+  width: 45%;
+  margin-bottom: 10px;
 }
 
 main {
@@ -63,11 +89,20 @@ button {
   margin-bottom: 3px;
 }
 
-#create-user label {
-  margin-left: 50px;
-}
-
-
 input {
   width: 250px;
+}
+
+/* Logo */
+
+#expedia-logo {
+  object-fit: contain;
+  height: 10%;
+  width: 50%;
+  margin: 0;
+}
+
+form h1 {
+  transform: translateY(-10px);
+  margin: 0;
 }

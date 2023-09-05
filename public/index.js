@@ -75,10 +75,13 @@
    * Submits the flight and directs the user to the flights page with the flight deal information
    * @param {Object} flightJson - JSON of flight information
    */
-  function dealViewSubmitFlight(flightJson) {
+  function dealViewSubmitFlight(event, flightJson) {
+    console.log(flightJson);
     localStorage.setItem("destination", flightJson.destination);
     localStorage.setItem("startDate", flightJson.start_date);
     localStorage.setItem("endDate", flightJson.end_date);
+    localStorage.setItem("flight-id", flightJson.id);
+    localStorage.setItem("flight-suggestion", "true");
     window.location.href="flights.html";
   }
 
@@ -254,17 +257,20 @@
      * @param {Object} flightJson - JSON of the flight
      */
     function displayDealInformation(flightJson) {
+      console.log(flightJson.destination);
+    console.log(flightJson.start_date);
+    console.log(flightJson.end_date);
       if (window.innerWidth <= 900) {
         mobileDealDisplay(flightJson);
-        qs("#mobile-deal-view button").addEventListener("click", (flightJson) => {
-          dealViewSubmitFlight(flightJson);
+        qs("#mobile-deal-view button").addEventListener("click", (event) => {
+          dealViewSubmitFlight(event, flightJson);
         })
       } else {
         displayDealPrice(flightJson);
         displayTripInfo(flightJson);
         addTwoDealImages(flightJson.destination);
-        qs("#deal-view button").addEventListener("click", (flightJson) => {
-          dealViewSubmitFlight(flightJson);
+        qs("#deal-view button").addEventListener("click", (event) => {
+          dealViewSubmitFlight(event, flightJson);
         });
       }
     }

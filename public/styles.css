@@ -180,8 +180,8 @@ main {
   margin: 0;
   padding: 0;
   z-index: 10;
-  background-color: #fff;
-  border: 0.5px solid rgb(176, 172, 172);
+  background-color: #ffffff;
+  border: 0.5px solid rgb(108, 108, 108);
 }
 
 /* Mobile Deal View */
@@ -199,7 +199,7 @@ main {
   z-index: 10;
   box-sizing: border-box;
   background-color: white;
-  border: 0.5px solid teal;
+  border: 0.5px solid black;
 }
 
 #mobile-deal-view section {
@@ -240,7 +240,7 @@ main {
 #mobile-details > p {
   text-align: center;
   font-size: 2rem;
-  color: teal;
+  color: rgb(2, 111, 111);
 }
 
 #mobile-details img {
@@ -282,7 +282,7 @@ main {
 
 #deal-view span:hover {
   cursor: pointer;
-  color: teal;
+  color: orange;
 }
 
 #deal-view figure {
@@ -292,7 +292,7 @@ main {
 }
 
 .deal {
-  border: 1px solid rgb(176, 172, 172);;
+  border: 0.5px solid rgb(108, 108, 108);
   box-sizing: border-box;
 }
 
@@ -353,12 +353,12 @@ main {
 }
 
 .price p {
-  font-size: 4.5rem;
+  font-size: 4.3rem;
   color: teal;
 }
 
 .price button, #mobile-deal-view button {
-  background-color: teal;
+  background-color: orange;
   border-radius: 4px;
   border: none;
   padding: 7px;

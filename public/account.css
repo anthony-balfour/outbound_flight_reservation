@@ -32,7 +32,28 @@
   justify-content: space-evenly;
   display: flex;
   align-items: center;
-  width: 40%;
+  width: 50%;
+}
+
+@media screen and (max-width: 700px) {
+  .flight-card {
+    width: 80%;
+  }
+
+  main #account-container aside {
+    flex-direction: column;
+    align-items: start;
+  }
+
+  #account-container aside h1:nth-child(2) {
+    margin: 0;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .flight-card {
+    width: 95%;
+  }
 }
 
 .logo {
