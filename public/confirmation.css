@@ -11,13 +11,26 @@
 /* flight info */
 
 .logo {
-  object-fit: cover;
-  width: 10%;
-  height: 50%;
+  object-fit: contain;
+  width: 120px;
+  height: 70px;
+  align-self: start;
 }
 
 #flight-info {
-  max-width: 35%;
+  width: 35%;
+}
+
+@media screen and (max-width: 1000px) {
+  #flight-info {
+    width: 50%;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  #flight-info {
+    width: 70%;
+  }
 }
 
 /* page styling */

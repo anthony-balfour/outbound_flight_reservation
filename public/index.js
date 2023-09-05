@@ -76,7 +76,6 @@
    * @param {Object} flightJson - JSON of flight information
    */
   function dealViewSubmitFlight(event, flightJson) {
-    console.log(flightJson);
     localStorage.setItem("destination", flightJson.destination);
     localStorage.setItem("startDate", flightJson.start_date);
     localStorage.setItem("endDate", flightJson.end_date);
@@ -257,9 +256,6 @@
      * @param {Object} flightJson - JSON of the flight
      */
     function displayDealInformation(flightJson) {
-      console.log(flightJson.destination);
-    console.log(flightJson.start_date);
-    console.log(flightJson.end_date);
       if (window.innerWidth <= 900) {
         mobileDealDisplay(flightJson);
         qs("#mobile-deal-view button").addEventListener("click", (event) => {

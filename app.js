@@ -171,7 +171,6 @@ app.post("/store_flight", async (req, res) => {
       // if the current flight is equal to any flights in past_flights, then it's unbookable
       let bookingCheckQuery = "SELECT * FROM flights f, past_flights p WHERE p.customer_id = ? AND f.id = p.flight_id AND (f.start_date = ? OR f.end_date = ?)";
       let bookingCheck = await db.all(bookingCheckQuery, [customerID, startDate, endDate]);
-      console.log(bookingCheck);
       if (bookingCheck.length > 0) {
         res.send("You are already booked on those dates. Please select a different date for your flight. Thank you");
       } else {

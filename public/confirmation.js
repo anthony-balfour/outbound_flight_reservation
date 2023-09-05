@@ -55,25 +55,34 @@
    */
   function displayFlightInfo(flight) {
     let flightContainer = generate("div");
-    let logo = generate("img");
-    let price = generate("p");
-    let nonstop = generate("p");
+
+    // destination/return
     let destination = generate("p");
     let returnLocation = generate("p");
-    let dates = generate("p");
-    let airline = generate("p");
     destination.classList.add("destination");
+    destination.textContent = "Destination: " + flight.destination;
+    returnLocation.textContent = "Return Location: " + flight.returnLocation;
+
+    // dates
+    let dates = generate("p")
     dates.textContent = flight.start_date + " until " + flight.end_date;
-    destination.textContent = flight.destination;
-    returnLocation.textContent = flight.returnLocation;
-    price.textContent = "$" + flight.price;
+
+    // price
+    let price = generate("p");
+    price.textContent = "Price: " + "$" + flight.price;
     price.classList.add("price");
+
+    //airline
+    let airline = generate("p");
     airline.textContent = flight.airline;
     airline.classList.add("airline");
-    nonstop.textContent = "nonstop";
+    let logo = generate("img");
     logo.src = "/images/" + flight.airline.toLowerCase() + ".png";
     logo.classList.add("logo");
     logo.alt = flight.airline + " logo";
+
+    let nonstop = generate("p");
+    nonstop.textContent = "nonstop";
     flightContainer.append(logo, airline, dates, nonstop, price, destination, returnLocation);
     id("flight-info").classList.add("black-border");
     id("flight-info").prepend(flightContainer);
@@ -117,8 +126,12 @@
 
     // if customer is already booked for that date
     if (text.includes("booked")) {
+      if (qs("main > p")) {
+        qs("main > p").remove();
+      }
       response.classList.add("red-text");
       qs("main").appendChild(response);
+
     } else {
       response.textContent += ". Please wait 2 seconds to confirm.";
       qs("main").appendChild(response);

@@ -240,7 +240,7 @@ main {
 #mobile-details > p {
   text-align: center;
   font-size: 2rem;
-  color: rgb(2, 111, 111);
+  color: orange;
 }
 
 #mobile-details img {
