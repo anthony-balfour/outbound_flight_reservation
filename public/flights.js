@@ -196,7 +196,7 @@
     let target = event.currentTarget;
     // clearing selected flight info container
     if( id("flight-info")){
-      id("flight-info").innerHTML = "";
+      id("flight-info").remove();
     }
 
     // If the current clicked card in grid view does not have a reserve button, a childNode[5],
