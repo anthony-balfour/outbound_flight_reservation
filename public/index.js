@@ -215,11 +215,17 @@
     } else {
       id("deal-view").classList.remove("hidden");
       // adding close option to deal-view "X" close button
-    qs("#deal-view span").addEventListener("click", () => {
+    qs("#deal-view .fa-circle-xmark").addEventListener("click", () => {
       id("deal-view").classList.add("hidden");
       id("cloned-image").remove();
       id("blur").remove();
+
+      // removing visible attribute from panels except for the main deal image
+      qsa(".visible").forEach(element => {
+        element.classList.remove("visible");
+      });
     })
+
     }
 
     // removes deal view image if already present
@@ -229,6 +235,13 @@
 
     // moves the clicked image to the deal view container
     createMovingImageEffect(event);
+
+    // removising visible:hidden attribute once the image has finished moving
+    setTimeout(() => {
+      qsa(".invisible").forEach(element => {
+        element.classList.add("visible");
+      })
+    }, 2000);
     }
 
     /**

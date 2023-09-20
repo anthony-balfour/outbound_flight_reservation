@@ -181,7 +181,15 @@ main {
   padding: 0;
   z-index: 10;
   background-color: #ffffff;
-  border: 0.5px solid rgb(108, 108, 108);
+  /* border: 0.5px solid rgb(108, 108, 108); */
+}
+
+.invisible {
+  visibility: hidden;
+}
+
+.visible {
+  visibility: visible;
 }
 
 /* Mobile Deal View */
