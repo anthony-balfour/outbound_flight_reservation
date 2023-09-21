@@ -220,13 +220,14 @@
       id("cloned-image").remove();
       id("blur").remove();
 
-      // removing visible attribute from panels except for the main deal image
-      qsa(".visible").forEach(element => {
-        element.classList.remove("visible");
-      });
     })
 
     }
+
+    // removing visible attribute from panels except for the main deal image
+    qsa(".visible").forEach(element => {
+      element.classList.remove("visible");
+    });
 
     // removes deal view image if already present
     if (qs("#cloned-image")) {
@@ -335,6 +336,9 @@
     let leftMove = (imageBoundaries.left - imageContainerBoundaries.left) * -1;
     let upMove = (imageBoundaries.top - imageContainerBoundaries.top) * -1;
     clonedImage.style.transition = "all 2s";
+    if (window.innerWidth < 900) {
+      clonedImage.style.transition ="all 1.5s";
+    }
     clonedImage.style.transform = `translate(${leftMove}px, ${upMove}px)`;
     clonedImage.style.height = `${imageContainerBoundaries.height}px`;
     clonedImage.style.width = `${imageContainerBoundaries.width}px`;
