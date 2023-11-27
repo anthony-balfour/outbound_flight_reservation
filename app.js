@@ -151,6 +151,9 @@ app.post("/create_user", async (req, res) => {
   }
 });
 
+/**
+ * Reserves a flight given POST parameters of flightID and customerID
+ */
 app.post("/store_flight", async (req, res) => {
   let flightID = req.body.flightID;
   let customerID = req.body.customerID;
