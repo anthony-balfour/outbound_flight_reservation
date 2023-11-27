@@ -16,7 +16,7 @@ COPY . .
 
 # Expose the port on which your app listens
 
-EXPOSE 3000
+EXPOSE 8000
 
 # The command to run the app
 
