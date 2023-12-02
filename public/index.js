@@ -242,7 +242,7 @@
       qsa(".invisible").forEach(element => {
         element.classList.add("visible");
       })
-    }, 2000);
+    }, 1000);
     }
 
     /**
