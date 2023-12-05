@@ -281,14 +281,14 @@ main {
   display: none;
 }
 
-#deal-view span {
+#deal-view > span {
   position: absolute;
   right: 9px;
   top: 9px;
   font-size: 1.7rem;
 }
 
-#deal-view span:hover {
+#deal-view > span:hover {
   cursor: pointer;
   color: orange;
 }
@@ -322,10 +322,13 @@ main {
 
 .details section {
   display: flex;
-  justify-content: space-evenly;
-  align-items: center;
+  justify-content: start;
+  flex-direction: column;
+  align-items: start;
   max-width: 100%;
   gap: 30px;
+  /* align-self: flex-start; */
+  margin-left: 2rem;
 }
 
 .details h2 {
@@ -348,7 +351,7 @@ main {
   padding: 10px;
 }
 
-.price div {
+.price > div {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -361,8 +364,15 @@ main {
 }
 
 .price p {
-  font-size: 4.3rem;
-  color: teal;
+  font-size: 3.3rem;
+  color: orange;
+}
+
+.price-text {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
 }
 
 .price button, #mobile-deal-view button {

@@ -219,9 +219,7 @@
       id("deal-view").classList.add("hidden");
       id("cloned-image").remove();
       id("blur").remove();
-
-    })
-
+      })
     }
 
     // removing visible attribute from panels except for the main deal image
@@ -336,8 +334,8 @@
     let leftMove = (imageBoundaries.left - imageContainerBoundaries.left) * -1;
     let upMove = (imageBoundaries.top - imageContainerBoundaries.top) * -1;
     clonedImage.style.transition = "all 2s";
-    if (window.innerWidth < 900) {
-      clonedImage.style.transition ="all 1.5s";
+    if (window.innerWidth > 900) {
+      clonedImage.style.transition ="all 1.4s";
     }
     clonedImage.style.transform = `translate(${leftMove}px, ${upMove}px)`;
     clonedImage.style.height = `${imageContainerBoundaries.height}px`;
@@ -362,10 +360,10 @@
       airline.textContent = flightJson.airline;
       airline.classList.add("deal-text");
       let header = generate("p");
-      header.textContent = "Airline";
+      header.textContent = "Airline: " + flightJson.airline;
       let line = generate("hr");
       header.classList.add("deal-text");
-      airlineContainer.append(header, line, airline);
+      airlineContainer.append(header);
 
       // dates information
       let start = flightJson.start_date.split("-");
@@ -373,21 +371,21 @@
       let dates = start[1] + "/" + start[2] + " to " + end[1] + "/" + end[2];
       let dateContainer = generate("div");
       let dateHeader = generate("p");
-      dateHeader.textContent = "Dates";
+      dateHeader.textContent = "Dates: " + dates;
       let line2 = generate("hr");
       dateHeader.classList.add("deal-text");
-      dateContainer.append(dateHeader, line2, dates);
+      dateContainer.append(dateHeader);
 
       //tickets
       let ticketHeader = generate("p");
-      ticketHeader.textContent = "Tickets";
+      ticketHeader.textContent = "Tickets: 2";
       ticketHeader.classList.add("deal-text");
       let numTickets = generate("p");
       numTickets.textContent = "2";
       let ticketsContainer = generate("div");
       let line3 = generate("hr");
       numTickets.classList.add("deal-text");
-      ticketsContainer.append(ticketHeader, line3, numTickets);
+      ticketsContainer.append(ticketHeader);
 
       let info = generate("section");
       info.append(airlineContainer, dateContainer, ticketsContainer);
@@ -440,8 +438,10 @@
      */
     function displayDealPrice(flightJson) {
       let heading = qs(".price").querySelector("h3");
-      heading.textContent = "Deal Price";
-      let price = qs(".price").querySelector("p");
+      // heading.textContent = "Deal Price";
+      let price = qs(".price-text").querySelector("p");
+      let deal = qs(".price-text").querySelector("span");
+      deal.textContent = "Deal Price: "
       price.textContent = "$" + flightJson.price;
     }
 
