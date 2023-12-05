@@ -1,4 +1,4 @@
-/* Include any CREATE statements from my DB */
+/* A few CREATE statements from the database */
 
 CREATE TABLE flights (
   flight_id INTEGER PRIMARY KEY autoincrement,
