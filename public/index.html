@@ -81,14 +81,34 @@
         <form>
           <div id="flight-places">
             <label> Where are you flying from? <input type="text" size="17" value="Seattle"></label>
-            <label> Where are you flying to? <input type="text" size="17"
-              placeholder="Phuket (City Name)"></label>
-            <label>Departing <input type="date" ></label>
-            <label id="returning-location">Returning <input type="date"></label>
-            <select id="round-one-way">
+            <!-- <label> Where are you flying to? <input type="text" size="17"
+              placeholder="Phuket (City Name)"></label> -->
+              <label>Where are you flying to?
+                <select >
+                  <option value="Phuket">Phuket</option>
+                  <option value="Los Angeles">Los Angeles</option>
+                  <option value="Dallas">Dallas</option>
+                  <option value="Portland">Portland</option>
+                  <option value="Miami">Miami</option>
+                  <option value="Boston">Boston</option>
+                  <option value="New York">New York</option>
+                  <option value="Tokyo">Tokyo</option>
+                  <option value="San Francisco">San Francisco</option>
+                  <option value="Bangkok">Bangkok</option>
+                  <option value="Austin">Austin</option>
+                  <option value="Paris">Paris</option>
+                  <option value="Las Vegas">Las Vegas</option>
+                  <option value="Manila">Manila</option>
+                  <option value="Manila">Osaka</option>
+                  <option value="">All</option>
+                </select>
+              </label>
+            <label>Departing <input type="date" value="2024-07-20"></label>
+            <label id="returning-location">Returning <input type="date" value="2024-08-21"></label>
+            <!-- <select id="round-one-way">
               <option value="round-trip">Round Trip</option>
               <option value="one-way">One Way</option>
-            </select>
+            </select> -->
           </div>
           <button type="submit">Enter</button>
         </form>

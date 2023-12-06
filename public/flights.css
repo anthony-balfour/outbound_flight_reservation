@@ -132,7 +132,8 @@ article .align-left {
   width: 40vw;
   left: 50%;
   height: 45vh;
-  margin-top: 25px;
+  margin-top: 20px;
+  max-height: 37.5vh;
 }
 
 #reserve div {
